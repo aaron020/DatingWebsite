@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <link rel="stylesheet" href="LoginStyle.css">
+ <title></title>
+</head>
+<body>
+
+  <div class="login">
+
+    <div class="heading">
+
+      <h1>Set Preferences</h1>
+
+      <form action="#">
+
+        <h3>Gender: </h3>
+        <select name="Interest" id="Interest">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Female">Both</option>
+        </select>
+
+        <h3>Hobbies:</h3>
+        <select name="Hobbies" id="Hobbies">
+          <option value="Football">Football</option>
+          <option value="Basketball">Basketball</option>
+          <option value="Jogging">Jogging</option>
+          <option value="Tennis">Tennis</option>
+          <option value="Swimming">Swimming</option>
+        </select>
+
+        <div class="Uni">
+          <h3>University:</h3>
+          <input type="text" class="form-control" placeholder="University of Limerick">
+        </div>
+
+        <div class="City">
+          <h3>City:</h3>
+          <input type="text" class="form-control" placeholder="Limerick">
+        </div>
+
+
+
+        <h3>Age Range:</h3>
+        <div class="slidecontainer">
+          <h4>From: <span id="demo"></span></h4>
+          <input style="width: 100%" type="range" min="18" max="100" value="18" class="slider" id="myRange">
+          
+          <script>
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+              output.innerHTML = this.value;
+            }
+          </script>
+        </div>
+
+        <div class="slidecontainer2">
+          <h4>To: <span id="demo2"></span></h4>
+          <input style="width: 100%" type="range" min="18" max="100" value="20" class="slider" id="myRange2">
+          
+          <script>
+            var slider = document.getElementById("myRange2");
+            var output = document.getElementById("demo2");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {
+              output.innerHTML = this.value;
+            }
+          </script>
+        </div>
+
+        <div class="submit-button">
+          <button type="submit" class="float">Browse Users</button>
+        </div>
+
+        
+      </form>
+    </div>
+  </div>
+</body>
+</html>
