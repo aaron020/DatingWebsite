@@ -69,3 +69,35 @@ button {
   width: 100%;
   box-shadow: 1px 1px 10px #323232;
 }
+
+
+hr {
+  border: 3px solid black;
+  border-radius:10px;
+}
+
+
+
+h5{
+   text-align: center;
+
+}
+
+.NameLocation{
+  line-height: 20%;
+}
+
+
+.JobUni{
+  margin: auto;
+  background: #FA4EAB;
+  border-radius: 50px;
+
+}
+
+.hobbies{
+  margin: auto;
+  background:  #ffccff;
+  border-radius: 50px;
+
+}
