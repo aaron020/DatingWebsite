@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <link rel="stylesheet" href="LoginStyle.css">
-  <title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="MainMenuStyle.css">
 </head>
 <body>
 
-  <div class="login">
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Browse Users</a>
+  <a href="#">Edit Preferences</a>
+  <a href="#">View Matches</a>
+  <a href="#">Favourite Matches</a>
+  <a href="#">Browse Users</a>
+  <a href="#">Contact Us</a>
+</div>
 
-    <div class="heading">
+<div id="main">
+  <h2>Website name</h2>
+  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Menu</span>
+</div>
 
-      <h1>Menu</h1>
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("main").style.marginLeft = "250px";
+  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+}
 
-      <form action="#">
-        <div class="submit-button">
-          <button type="submit" class="float">Browse Users</button>
-        </div>
-
-        <div class="Preferences">
-          <button style="background-color: #bfbfbf;" type="submit" class="float">Change Preferences</button>
-        </div>
-
-        <div class="Matches">
-          <button type="submit" class="float">Matches</button>
-        </div>
-
-        <div class="Best Match">
-          <button style="background-color: #bfbfbf;" type="submit" class="float">Best Match</button>
-        </div>
-
-        <div class="Update Information">
-          <button  type="submit" class="float">Update Information</button>
-        </div>
-
-        <div class="View Profile">
-          <button style="background-color: #bfbfbf;" type="submit" class="float">View Profile</button>
-        </div>
-
-        <div class="Logout">
-          <button  type="submit" class="float">Logout</button>
-        </div>
-
-                
-        
-      </form>
-    </div>
-  </div>
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+  document.body.style.backgroundColor = "white";
+}
+</script>
+   
 </body>
-</html>
+</html> 
