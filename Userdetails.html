@@ -1,28 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-   <link rel="stylesheet" href="LoginStyle.css">
+   <link rel="stylesheet" href="style/UserDetailStyle.css">
   <title></title>
 </head>
 <body>
 
-  <div class="login" style="width: 40%;">
+
+    <script type="text/javascript">
+      function validateForm() {
+        var firstname = document.forms["CreateUser"]["firstname"].value;
+        var lastname = document.forms["CreateUser"]["lastname"].value;
+        var gender = document.forms["CreateUser"]["gender"].value;
+        var city = document.forms["CreateUser"]["city"].value;
+
+        if(firstname == null || firstname == ""){
+          document.getElementById('firstname').style.opacity = "1";          
+          document.getElementById('firstname').style.boxShadow = "2px 2px 20px red";
+        }
+        if(lastname == null || lastname == ""){
+          document.getElementById('lastname').style.opacity = "1";          
+          document.getElementById('lastname').style.boxShadow = "2px 2px 20px red";
+        }
+
+        if(city == null || city == ""){
+          document.getElementById('city').style.opacity = "1";          
+          document.getElementById('city').style.boxShadow = "2px 2px 20px red";
+        }
+
+
+        if (firstname == null || firstname == "", lastname == null || lastname == "", gender == null || gender == "", city == null || city == "") {
+          alert("Please Fill All Required Field");
+          return false;
+        }else{
+          alert("User Created!");
+          return true;
+        }
+      }
+    </script>
+
+  <div class="userDetails" style="width: 40%;">
 
     <div class="heading">
 
       <h1>User Details</h1>
+      <hr>
 
-      <form action="#">
+      <form action="#" name="CreateUser" onsubmit="return validateForm()">
 
         <div class="image-button">
-          <button type="submit" class="float">Upload Picture</button>
+            <h3>Profile Pic: </h3>
+            <input type="file" id="img" name="img" accept="image/*">
         </div>
 
 
         <div class="input-user">
           <h3>Name:</h3>
-          <input type="text" class="form-control" placeholder="First Name">
-          <input type="text" class="form-control" placeholder="Surname">
+          <input type="text" name = "firstname" id="firstname" placeholder="First Name">
+          <input type="text" name = "lastname" id="lastname" placeholder="Surname">
         </div>
 
         <h3>Gender:</h3>
@@ -50,12 +85,12 @@
 
         <div class="City">
           <h3>City:</h3>
-          <input type="text" class="form-control" placeholder="Limerick">
+          <input type="text" id = "city" name="city" placeholder="Limerick">
         </div>
 
         <div class="Bio">
           <h3>Bio :</h3>
-          <input style="height: 200px;" type="text" placeholder="">
+          <textarea rows="5" maxlength="250" name="Bio" placeholder="Bio..."></textarea>
         </div>
 
 
@@ -73,13 +108,7 @@
 
 
         <h3>Hobbies:</h3>
-        <select name="Hobbies" id="Hobbies">
-          <option value="Football">Football</option>
-          <option value="Basketball">Basketball</option>
-          <option value="Jogging">Jogging</option>
-          <option value="Tennis">Tennis</option>
-          <option value="Swimming">Swimming</option>
-        </select>
+          <input type="text" name="Hobbies" placeholder="Swimming,Running,Computer Science ... ">
 
                 
 
