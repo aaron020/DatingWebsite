@@ -7,57 +7,22 @@
 <body>
 
 
-    <script type="text/javascript">
-      function validateForm() {
-        var firstname = document.forms["CreateUser"]["firstname"].value;
-        var lastname = document.forms["CreateUser"]["lastname"].value;
-        var gender = document.forms["CreateUser"]["gender"].value;
-        var city = document.forms["CreateUser"]["city"].value;
-
-        if(firstname == null || firstname == ""){
-          document.getElementById('firstname').style.opacity = "1";          
-          document.getElementById('firstname').style.boxShadow = "2px 2px 20px red";
-        }
-        if(lastname == null || lastname == ""){
-          document.getElementById('lastname').style.opacity = "1";          
-          document.getElementById('lastname').style.boxShadow = "2px 2px 20px red";
-        }
-
-        if(city == null || city == ""){
-          document.getElementById('city').style.opacity = "1";          
-          document.getElementById('city').style.boxShadow = "2px 2px 20px red";
-        }
-
-
-        if (firstname == null || firstname == "", lastname == null || lastname == "", gender == null || gender == "", city == null || city == "") {
-          alert("Please Fill All Required Field");
-          return false;
-        }else{
-          alert("User Created!");
-          return true;
-        }
-      }
-    </script>
+  <script type="text/javascript" src="js/UserDetails.js"></script>
 
   <div class="userDetails" style="width: 40%;">
-
-    <div class="heading">
-
       <h1>User Details</h1>
       <hr>
 
       <form action="#" name="CreateUser" onsubmit="return validateForm()">
-
         <div class="image-button">
-            <h3>Profile Pic: </h3>
+            <h3>Profile Pic:</h3>
             <input type="file" id="img" name="img" accept="image/*">
         </div>
 
-
         <div class="input-user">
           <h3>Name:</h3>
-          <input type="text" name = "firstname" id="firstname" placeholder="First Name">
-          <input type="text" name = "lastname" id="lastname" placeholder="Surname">
+          <input type="text" name = "firstname" id="firstname" maxlength="20" placeholder="First Name">
+          <input type="text" name = "lastname" id="lastname" maxlength="20" placeholder="Surname">
         </div>
 
         <h3>Gender:</h3>
@@ -66,11 +31,9 @@
           <option value="Female">Female</option>
         </select>
 
-
         <div class="slidecontainer">
           <h3>Age: <span id="demo"></span></h3>
           <input style="width: 100%" type="range" min="18" max="100" value="24" class="slider" id="myRange">
-          
           <script>
             var slider = document.getElementById("myRange");
             var output = document.getElementById("demo");
@@ -82,55 +45,42 @@
           </script>
         </div>
 
-
         <div class="City">
           <h3>City:</h3>
-          <input type="text" id = "city" name="city" placeholder="Limerick">
+          <input type="text" id = "city" name="city" maxlength= "30" placeholder="Limerick">
         </div>
 
         <div class="Bio">
           <h3>Bio :</h3>
-          <textarea rows="5" maxlength="250" name="Bio" placeholder="Bio..."></textarea>
+          <textarea rows="5" maxlength="250" name="bio" id = "bio" placeholder="Bio..."></textarea>
         </div>
-
 
         <div class="Uni">
           <h3>University:</h3>
-          <input type="text" class="form-control" placeholder="University of Limerick">
+          <input type="text" name = "uni" id = "uni" maxlength= "30" placeholder="University of Limerick">
         </div>
 
         <div class="Job">
           <h3>Job:</h3>
-          <input type="text" class="form-control" placeholder="Student">
+          <input type="text" name  = "job" id = "job" maxlength = "30" placeholder="Student">
         </div>
 
+        <div class="Hobbies">
+          <h3>Hobbies:</h3>
+          <input type="text" name="hobbies" id = "hobbies" maxlength = "100" placeholder="Swimming,Running,Computer Science ... ">
+        </div>
 
-
-
-        <h3>Hobbies:</h3>
-          <input type="text" name="Hobbies" placeholder="Swimming,Running,Computer Science ... ">
-
-                
-
-
-                <h3>Interested In:</h3>
+        <h3>Interested In:</h3>
         <select name="Interest" id="Interest">
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Female">Both</option>
         </select>
 
-
-
-
         <div class="submit-button">
           <button type="submit" class="float">Submit Profile</button>
-        </div>
-
-                
-        
+        </div> 
       </form>
-    </div>
   </div>
 </body>
 </html>
