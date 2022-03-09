@@ -1,0 +1,25 @@
+CREATE TABLE `epiz_31203799_loveconnect`.`users` ( `userId` INT(10) NULL DEFAULT NULL AUTO_INCREMENT ,
+ `username` VARCHAR(12) NULL DEFAULT NULL , `password` VARCHAR(30) NULL DEFAULT NULL , 
+`isAdmin` BOOLEAN NULL DEFAULT FALSE , PRIMARY KEY (`userId`)) ENGINE = MyISAM; 
+
+
+
+
+
+
+CREATE TABLE `epiz_31203799_loveconnect`.`userdetails` ( `userId` INT(10) NOT NULL , 
+`firstname` VARCHAR(16) NULL DEFAULT NULL , `lastname` VARCHAR(16) NULL DEFAULT NULL , 
+`gender` VARCHAR(16) NULL DEFAULT NULL , 
+`age` INT(2) NULL DEFAULT NULL , `city` VARCHAR(16) NULL DEFAULT NULL , 
+`bio` VARCHAR(255) NULL DEFAULT NULL , `university` VARCHAR(30),
+`job` VARCHAR(30), `hobbies` VARCHAR(100), `university` VARCHAR(30), `contact` VARCHAR(30)) ENGINE = MyISAM;
+
+
+ALTER TABLE userdetails
+ADD COLUMN interests VARCHAR(16) AFTER hobbies;
+
+ALTER TABLE `userdetails`
+  ADD CONSTRAINT `userdetails_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`);
+
+
+

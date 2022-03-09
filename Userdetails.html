@@ -12,8 +12,9 @@
   <div class="userDetails" style="width: 40%;">
       <h1>User Details</h1>
       <hr>
-
-      <form action="userdetails.php" name="CreateUser" method="post" onsubmit="return validateForm() ">
+      <!-- onsubmit="return validateForm() -->
+      <form action="userdetails.php" name="CreateUser" method = "post"
+      onsubmit="return validateForm() ">
         <div class="image-button">
             <h3>Profile Pic:</h3>
             <input type="file" id="img" name="img" accept="image/*">
@@ -33,7 +34,7 @@
 
         <div class="slidecontainer">
           <h3>Age: <span id="demo"></span></h3>
-          <input style="width: 100%" type="range" min="18" max="100" value="24" class="slider" id="myRange">
+          <input style="width: 100%" name = "age"type="range" min="18" max="100" value="24" class="slider" id="myRange">
           <script>
             var slider = document.getElementById("myRange");
             var output = document.getElementById("demo");
@@ -71,11 +72,16 @@
         </div>
 
         <h3>Interested In:</h3>
-        <select name="Interest" id="Interest">
+        <select name="interest" id="interest">
           <option value="Male">Male</option>
           <option value="Female">Female</option>
           <option value="Female">Both</option>
         </select>
+
+        <div class="Contact">
+          <h3>Instagram Handle: </h3>
+          <input type="text" name="contact" id = "contact" maxlength="30" placeholder="johndoe321">
+        </div>
 
         <div class="submit-button">
           <button type="submit" class="float">Submit Profile</button>

@@ -1,4 +1,3 @@
-
 function validateForm() {
   var firstname = document.forms["CreateUser"]["firstname"].value;
   var lastname = document.forms["CreateUser"]["lastname"].value;
@@ -19,7 +18,8 @@ function validateForm() {
 
 
   if ( (firstname == null || firstname == "") || (lastname == null || lastname == "") 
-    || (img == null || img == "") || (city == null || city == "")) {
+    || (img == null || img == "") || (city == null || city == "") || (job == null || job == "")
+        || (hobbies == null || hobbies == "") || (bio == null || bio == "")) {
     alert("Please Fill All Required Field");
     return false;
   }else{
