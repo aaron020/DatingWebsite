@@ -1,85 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="LoginStyle.css">
- <title></title>
+ <meta charset="utf-8"/>
+ <link rel="stylesheet" href="style/InputStyle.css">
+ <title>Preferences</title>
 </head>
 <body>
+  <script type="text/javascript" src="js/setPreferences.js"></script>
+  <div class="box" style="width: 30%">
+    <h1>Set Preferences</h1>
+    <hr>
+    <form action="preferences.php" name="setPreferences" method = "post"
+    onsubmit="return validateAge()">
 
-  <div class="login">
-
-    <div class="heading">
-
-      <h1>Set Preferences</h1>
-
-      <form action="#">
-
+      <div class="Gender">
         <h3>Gender: </h3>
-        <select name="Interest" id="Interest">
+        <select name="gender" id="gender">
           <option value="Male">Male</option>
           <option value="Female">Female</option>
-          <option value="Female">Both</option>
+          <option value="Both">Both</option>
         </select>
+      </div>
 
+
+      <div class="Hobbies">
         <h3>Hobbies:</h3>
-        <select name="Hobbies" id="Hobbies">
-          <option value="Football">Football</option>
-          <option value="Basketball">Basketball</option>
-          <option value="Jogging">Jogging</option>
-          <option value="Tennis">Tennis</option>
-          <option value="Swimming">Swimming</option>
-        </select>
+        <input type="text" name = "hobbies" id = "hobbies" placeholder="Jogging, Swimming">
+      </div>
 
-        <div class="Uni">
-          <h3>University:</h3>
-          <input type="text" class="form-control" placeholder="University of Limerick">
-        </div>
+      <div class="Uni">
+        <h3>University:</h3>
+        <input type="text" name = "uni" id = "uni" placeholder="University of Limerick">
+      </div>
 
-        <div class="City">
-          <h3>City:</h3>
-          <input type="text" class="form-control" placeholder="Limerick">
-        </div>
+      <div class="City">
+        <h3>City:</h3>
+        <input type="text" name = "city" id = "city"  placeholder="Limerick">
+      </div>
 
 
 
+
+      <div class="slidecontainer">
         <h3>Age Range:</h3>
-        <div class="slidecontainer">
-          <h4>From: <span id="demo"></span></h4>
-          <input style="width: 100%" type="range" min="18" max="100" value="18" class="slider" id="myRange">
-          
-          <script>
-            var slider = document.getElementById("myRange");
-            var output = document.getElementById("demo");
-            output.innerHTML = slider.value;
 
-            slider.oninput = function() {
-              output.innerHTML = this.value;
-            }
-          </script>
-        </div>
 
-        <div class="slidecontainer2">
-          <h4>To: <span id="demo2"></span></h4>
-          <input style="width: 100%" type="range" min="18" max="100" value="20" class="slider" id="myRange2">
-          
-          <script>
-            var slider = document.getElementById("myRange2");
-            var output = document.getElementById("demo2");
-            output.innerHTML = slider.value;
+        <h4>From: <span id="demoFrom"></span></h4>
+        <input style="width: 100%" type="range" name = "age_from" min="18" max="99" value = "18" class="slider" id="myRangeFrom">
 
-            slider.oninput = function() {
-              output.innerHTML = this.value;
-            }
-          </script>
-        </div>
 
-        <div class="submit-button">
-          <button type="submit" class="float">Browse Users</button>
-        </div>
+        <h4>To: <span id="demoTo"></span></h4>
+        <input style="width: 100%" type="range" name = "age_to" min="18" max="99" value = "18" class="slider" id="myRangeTo">
 
-        
-      </form>
-    </div>
+        <script>
+          var sliderFrom = document.getElementById("myRangeFrom");
+          var outputFrom = document.getElementById("demoFrom");
+          var sliderTo = document.getElementById("myRangeTo");
+          var outputTo = document.getElementById("demoTo");
+          outputFrom.innerHTML = sliderFrom.value;
+          sliderFrom.oninput = function() {
+            outputFrom.innerHTML = this.value;
+          }
+
+          outputTo.innerHTML = sliderTo.value;
+          sliderTo.oninput = function() {
+            outputTo.innerHTML = this.value;
+          }            
+        </script>
+      </div>
+
+      <h3><?php
+        echo $gender;
+
+      ?>
+      </h3>
+
+
+      <div class="submit-button">
+        <button type="submit" class="float">Browse Users</button>
+      </div>
+
+
+    </form>
   </div>
 </body>
 </html>
