@@ -12,10 +12,17 @@ $job =  $_POST['job'];
 $hobbies =  $_POST['hobbies'];
 $interest = $_POST['interest'];
 $contact = $_POST['contact'];
-$query = "insert into userdetails (userId,firstname,lastname,gender,age,city,bio,university,job,hobbies,interests,contact) values ('4', '$firstname', '$lastname','$gender',$age,'$city','$bio','$uni','$job','$hobbies','$interest','$contact');";
-	if(!mysqli_query($con,$query)){
-		echo("Error description: " . mysqli_error($con));
-	}
+
+
+
+$query = "insert into userdetails (userId,firstname,lastname,gender,age,city,bio,university,job,hobbies,interests,contact) 
+	values ('4', '$firstname', '$lastname','$gender',$age,'$city','$bio','$uni','$job','$hobbies','$interest','$contact');";
+
+
+
+if(!mysqli_query($con,$query)){
+	echo("Error description: " . mysqli_error($con));
+}
 
 echo($_POST['img']);
 echo $_POST['firstname'];

@@ -15,11 +15,13 @@ function validateForm() {
   validateInput(job,"job");
   validateInput(hobbies,"hobbies");
   validateInput(bio, "bio");
+  if(empty(firstname)){
+    console.log("Firstname is empty");
+  }
 
-
-  if ( (firstname == null || firstname == "") || (lastname == null || lastname == "") 
-    || (img == null || img == "") || (city == null || city == "") || (job == null || job == "")
-        || (hobbies == null || hobbies == "") || (bio == null || bio == "")) {
+  if ( (firstname == null || empty(firstname)) || (lastname == null || empty(lastname)) 
+    || (img == null || img == "") || (city == null || empty(city)) || (job == null || empty(job))
+        || (hobbies == null || empty(hobbies)) || (bio == null || empty(bio))) {
     alert("Please Fill All Required Field");
     return false;
   }else{
@@ -29,7 +31,7 @@ function validateForm() {
 }
 
 function validateInput(input, inputName){
-  if(input == null || input == ""){
+  if(input == null || empty(input)){
     inputError(inputName);
   }else{
     inputNormal(inputName);
@@ -44,4 +46,8 @@ function inputError(input){
 function inputNormal(input){
   document.getElementById(input).style.opacity = ".7";          
   document.getElementById(input).style.boxShadow = "1px 1px 10px #323232";
+}
+//Input is empty or just space 
+function empty(input){
+  return input.trim().length === 0;
 }
