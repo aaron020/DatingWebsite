@@ -24,6 +24,8 @@ if(!mysqli_query($con,$query)){
 	echo("Error description: " . mysqli_error($con));
 }
 
+
+//Just for testing -- 
 echo($_POST['img']);
 echo $_POST['firstname'];
 echo $_POST['lastname'];

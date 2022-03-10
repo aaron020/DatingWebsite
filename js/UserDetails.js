@@ -1,4 +1,6 @@
+var correct;
 function validateForm() {
+  correct = true;
   var firstname = document.forms["CreateUser"]["firstname"].value;
   var lastname = document.forms["CreateUser"]["lastname"].value;
   var gender = document.forms["CreateUser"]["gender"].value;
@@ -7,36 +9,46 @@ function validateForm() {
   var job = document.forms["CreateUser"]["job"].value;
   var hobbies = document.forms["CreateUser"]["hobbies"].value;
   var bio = document.forms["CreateUser"]["bio"].value;
-
+  console.log(correct);
   validateInput(firstname, "firstname");
+  console.log(correct);
   validateInput(lastname, "lastname");
   validateInput(city, "city");
-  validateInput(img, "img");
+  //validateImg(img, "img");
   validateInput(job,"job");
   validateInput(hobbies,"hobbies");
   validateInput(bio, "bio");
-  if(empty(firstname)){
-    console.log("Firstname is empty");
-  }
+  console.log(correct);
 
-  if ( (firstname == null || empty(firstname)) || (lastname == null || empty(lastname)) 
-    || (img == null || img == "") || (city == null || empty(city)) || (job == null || empty(job))
-        || (hobbies == null || empty(hobbies)) || (bio == null || empty(bio))) {
-    alert("Please Fill All Required Field");
+  if(correct == false){
+    alert("Some errors with your inputs, they are highlighted in red");
     return false;
   }else{
     alert("User Created!");
-    return true;
+    return false;
   }
+
 }
 
+
 function validateInput(input, inputName){
-  if(input == null || empty(input)){
+  if(inputName == "bio"){
+    if(input == null || input == ""){
+      inputError(inputName);
+      correct = false;
+    }else{
+      inputNormal(inputName);
+    }
+    return;
+  }
+  if(input == null || !(/^[a-zA-Z]+$/.test(input)) || input == ""){
     inputError(inputName);
+    correct = false;
   }else{
     inputNormal(inputName);
   }
 }
+
 
 function inputError(input){
     document.getElementById(input).style.opacity = "1";          
