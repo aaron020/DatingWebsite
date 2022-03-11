@@ -11,6 +11,7 @@ $age_high =  $_POST['age_to'];
 $query = "insert into userpreferences (userId,gender,hobbies,university,city,age_high,age_low) 
 	values ('4', '$gender', '$hobbies','$uni','$city',$age_high,$age_low);";
 if(!mysqli_query($con,$query)){
+	//header("Location : error.html");
 	echo("Error description: " . mysqli_error($con));
 }
 //Testing purposes 
