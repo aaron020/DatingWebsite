@@ -2,7 +2,7 @@
 <html>
 <head>
    <link rel="stylesheet" href="LoginStyle.css">
-  <title></title>
+  <title>Login</title>
 </head>
 <body style="margin: 0px; padding: 0px;">
   <h1 style="font-family: Brush Script MT, Brush Script Std, cursive; font-size: 100px; margin: 5px;">Love Connect</h1>
@@ -12,20 +12,21 @@
 
       <h1>Sign in</h1>
 
-      <form action="includes/login.inc.php">
+      <form action="includes/login.inc.php" method="post">
 
         <div class="input-user">
-          <input type="text" name="name" class="form-control" placeholder="Username">
+          <input type="text" class="form-control" name="usersId" placeholder="Username">
         </div>
 
         <div class="input-password">
-          <input type="password" name="pwd" class="form-control" placeholder="Password">
+          <input type="password" class="form-control" name="pwd" placeholder="Password">
         </div>
+
         <div class="submit-button">
-          <button type="submit" class="float">Login</button>
+          <button type="submit" name="submit" class="float">Sign In</button>
         </div>
-          <p><a href="Register.html">Sign Up</a>   </p>
-                
+
+        <p><a href="Register.html">Register</a>   </p>
         
       </form>
     </div>

@@ -2,7 +2,7 @@
 <html>
 <head>
    <link rel="stylesheet" href="LoginStyle.css">
-  <title></title>
+  <title>Register</title>
 </head>
 <body>
   <h1 style="font-family: Brush Script MT, Brush Script Std, cursive; font-size: 100px; margin: 5px;">Love Connect</h1>
@@ -12,7 +12,6 @@
 
     <div class="heading">
       <h1>Register</h1>
-
       <form action="includes/signup.inc.php" method="post">
 
         <div class="input-user">
@@ -31,7 +30,25 @@
         <p><a href="Login.html">Sign In</a>   </p>
         
       </form>
+	  <!-- <?php
+		if (isset($_GET["error"])) {
+			if ($_GET["error"] == "emptyinput") {
+				echo "<p>Fill in all fields!</p>";
+			}
+		}
+		else if ($_GET["error"] == "noname") {
+			echo "<p>Invalid username!</p>";
+		}
+		else if ($_GET["error"] == "pwdnomatch") {
+			echo "<p>Passwords do not match.</p>";
+		}
+		else if ($_GET["error"] == "usernametaken") {
+			echo "<p>Username is taken.</p>";
+		}
+		error_reporting(E_ALL & ~E_NOTICE);
+		?> -->
     </div>
+	
   </div>
 </body>
 </html>
