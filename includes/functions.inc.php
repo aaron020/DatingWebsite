@@ -96,7 +96,7 @@ function createUser($conn, $name, $pwd) {
 	mysqli_stmt_bind_param($stmt, "ss", $name, $hashedpwd);
 	mysqli_stmt_execute($stmt);
 	mysqli_stmt_close($stmt);
-	header("location: ../EditUser.html?error=none");
+	header("location: Login.html");
 	exit();
 }
 function noInputLogin($name, $pwd) {
@@ -125,10 +125,11 @@ function loginUser($conn, $name, $pwd){
 		header("location: ../Login.html?error-wrongpassword= ");
 		exit();
 	}
+
 	else if ($checkPwd == true) {
 		session_start();
 		$_SESSION["userName"] = $uidExists["userName"];
-		header("location: ../EditUser.html?error=none");
+		header("location: Userdetails.html");
 		exit();
 	}
 }
