@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-   <link rel="stylesheet" href="style/InputStyle.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style/InputStyle.css">
   <title>User Details</title>
 </head>
 <body>
@@ -14,8 +15,11 @@
       <h1>User Details</h1>
       <hr>
       <!-- onsubmit="return validateForm() -->
+      
       <form action="userdetails.php" name="CreateUser" method = "post"
-      onsubmit="return validateForm() ">
+      onsubmit="return validateForm() " enctype="multipart/form-data"> 
+<!--     <form action="test.php"  method = "post"
+    enctype="multipart/form-data">  -->
         <div class="image-button">
             <h3>Profile Pic:</h3>
             <input type="file" id="img" name="img" accept="image/*">

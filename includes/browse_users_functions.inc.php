@@ -33,6 +33,16 @@ function getPreferences($userId, $con){
 	}
 }
 
+function getImg($userId, $con){
+	$query = "SELECT * FROM images WHERE userId = $userId";
+	$result = mysqli_query($con, $query);
+	if(mysqli_num_rows($result) > 0){
+		return mysqli_fetch_assoc($result);
+	}else{
+		echo("error");
+	}
+}
+
 //Returns an array of all the user details
 function getUserDetails($userId, $con){
 	$query = "SELECT * FROM userdetails WHERE userId = $userId";
@@ -71,8 +81,8 @@ function groupHobbies($hobbies){
 }
 
 //Takes an array of a users preferences and returns an array of userID's that meet the preferences
-functions usersByPrefence($preferences){
+// functions usersByPrefence($preferences){
 	
 
 
-}
+// }

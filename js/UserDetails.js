@@ -25,14 +25,14 @@ function validateForm() {
     return false;
   }else{
     alert("User Created!");
-    return false;
+    return true;
   }
 
 }
 
 
 function validateInput(input, inputName){
-  if(inputName == "bio"){
+  if(inputName == "bio" || inputName == "hobbies"){
     if(input == null || input == ""){
       inputError(inputName);
       correct = false;
