@@ -1,10 +1,21 @@
 <?php
 session_start();
-  if(empty($_SESSION['userCount']) || $_SESSION['userCount'] > 7){
-    $_SESSION['userCount'] = 0;
+$maxUsers = 7; // Amount of users found based off the preferences give
+
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
+    echo $_SESSION['userCount'];
+
+}
+  if(empty($_SESSION['userCount'])){
+    $_SESSION['userCount'] = 1;
   }
-  $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
-  echo $_SESSION['userCount'];
+  if($_SESSION['userCount'] >= $maxUsers){
+    header('Location: noUsers.html');
+    exit();
+  }
+
+
 
 
   include("connections.php");
@@ -20,12 +31,12 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-   <link rel="stylesheet" href="LoginStyle.css">
+   <link rel="stylesheet" href="style/BrowseStyle.css">
   <title></title>
 </head>
 <body>
 
-  <div style="width: 40%;" class="login">
+  <div style="width: 40%;" class="users">
 
     <div class="heading">
       <a href="Menu.html"> <button style="width: 20%;">Main Menu</button> </a>

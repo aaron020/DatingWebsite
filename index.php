@@ -1,6 +1,7 @@
 <?php
 session_start();
 $_SESSION['userCount'] = 0;
+echo "I see this";
 
 
 ?>
