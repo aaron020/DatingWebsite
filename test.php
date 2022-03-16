@@ -15,11 +15,18 @@ include("connections.php");
 //move_uploaded_file($_FILES['img']['tmp_name'], $targetFile);
 
 
-$pref = getPreferences(6, $con);
+$pref = getPreferences(2, $con);
 
 
-$ids = usersByPrefence($pref, $con);
+$ids = usersByPrefence($pref, 6,$con);
 print_r($ids);
 
+// addLike(1,2, $con);
+
+// $liked = notInterestedUsers(4,$con);
+// print_r($liked);
+
+// $banned = bannedUsers($con);
+// print_r($banned);
 // $hobbies = groupHobbies("running,swimming,cycling,minercaft");
 // print_r($hobbies);

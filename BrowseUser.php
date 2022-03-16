@@ -1,29 +1,48 @@
 <?php
 session_start();
-$maxUsers = 7; // Amount of users found based off the preferences give
+include("includes/browse_users_functions.inc.php");
+include("connections.php");
+
+
+//The user that is logged in
+$userId_LoggedIn = 2;
+
+
+
+
+
+$pref = getPreferences($userId_LoggedIn, $con);
+$ids = usersByPrefence($pref, $userId_LoggedIn,$con);
+$maxUsers = count($ids); // Amount of users found based off the preferences give
+
+echo $_SESSION['userCount'];
+print($maxUsers);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
-    echo $_SESSION['userCount'];
-
-}
-  if(empty($_SESSION['userCount'])){
-    $_SESSION['userCount'] = 1;
+  if($_POST['action'] == 'Yes'){
+    addLike($userId_LoggedIn, $ids[$_SESSION['userCount']], $con);
   }
-  if($_SESSION['userCount'] >= $maxUsers){
+  if($_POST['action'] == 'No'){
+    addNotInterested($userId_LoggedIn, $ids[$_SESSION['userCount']], $con);
+  }
+  $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
+}
+
+if(empty($_SESSION['userCount'])){
+    $_SESSION['userCount'] = 0;
+}
+if($_SESSION['userCount'] >= $maxUsers){
     header('Location: noUsers.html');
     exit();
-  }
+}
 
 
 
 
-  include("connections.php");
-  include("includes/browse_users_functions.inc.php");
-  $userDet = getUserDetails($_SESSION['userCount'] , $con);
+$userDet = getUserDetails($ids[$_SESSION['userCount']], $con);
 
-  $imgData = getImg($_SESSION['userCount'] , $con);
-  $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+$imgData = getImg($ids[$_SESSION['userCount']], $con);
+$imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
 ?>
 
 
@@ -80,8 +99,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
  
         <h3 style="text-align: center;">Interested?</h3>
         <form method="post" action="BrowseUser.php">
-          <input type="submit" name="yes" value="Yes">
-          <input type="submit" name="no" value="No">
+          <input type="submit" name="action" value="Yes">
+          <input type="submit" name="action" value="No">
         </form>
     </div>
   </div>
