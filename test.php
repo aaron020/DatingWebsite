@@ -1,5 +1,5 @@
 <?php
-
+include("includes/editUser.inc.php");
 include("includes/browse_users_functions.inc.php");
 include("connections.php");
 
@@ -15,11 +15,14 @@ include("connections.php");
 //move_uploaded_file($_FILES['img']['tmp_name'], $targetFile);
 
 
-$pref = getPreferences(2, $con);
+// $pref = getPreferences(2, $con);
 
 
-$ids = usersByPrefence($pref, 6,$con);
-print_r($ids);
+// $ids = usersByPrefence($pref, 6,$con);
+// print_r($ids);
+
+
+echo testValue("132131", "Default");
 
 // addLike(1,2, $con);
 

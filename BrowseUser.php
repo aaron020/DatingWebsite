@@ -4,8 +4,8 @@ include("includes/browse_users_functions.inc.php");
 include("connections.php");
 
 
-//The user that is logged in
-$userId_LoggedIn = 2;
+//The user that is logged in  11 to see all users
+$userId_LoggedIn =11;
 
 
 

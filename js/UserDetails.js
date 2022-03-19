@@ -14,7 +14,7 @@ function validateForm() {
   console.log(correct);
   validateInput(lastname, "lastname");
   validateInput(city, "city");
-  //validateImg(img, "img");
+  validateImg(img, "img");
   validateInput(job,"job");
   validateInput(hobbies,"hobbies");
   validateInput(bio, "bio");
@@ -32,7 +32,7 @@ function validateForm() {
 
 
 function validateInput(input, inputName){
-  if(inputName == "bio" || inputName == "hobbies"){
+  if(inputName == "bio" || inputName == "hobbies" || inputName = 'img'){
     if(input == null || input == ""){
       inputError(inputName);
       correct = false;
