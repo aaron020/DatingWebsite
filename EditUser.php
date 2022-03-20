@@ -1,13 +1,12 @@
 <?php
+session_start();
 include("includes/browse_users_functions.inc.php");
 include("connections.php");
 
 
 //The user that is logged in - Get their details
-$userId_LoggedIn = 8;
+$userId_LoggedIn = $_SESSION['ID'];
 $userDet = getUserDetails($userId_LoggedIn, $con);
-
-
 ?>
 
 

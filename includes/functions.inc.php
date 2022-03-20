@@ -152,8 +152,8 @@ function loginUser($conn, $name, $pwd){
 	else if ($checkPwd == true) {
 		session_start();
 		$UID = UidGet($conn, $name);
-		$_SESSION['ID'] = $UID;
-		header("location: ../Userdetails.html");
+		$_SESSION['ID'] = $UID['userId'];
+		header("location: ../Userdetails.html"/* .$_SESSION['ID'] */);
 		exit();
 	}
 }
