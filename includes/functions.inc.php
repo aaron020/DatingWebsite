@@ -34,7 +34,7 @@ function pwdCon($pwd, $pwd_confirm) {
 }
 function UidExists($conn, $name) {
 	
-	$sql = "SELECT * FROM users WHERE usersName = ?;";//Add OR usersEmail = ? if looking for email
+	$sql = "SELECT * FROM users WHERE username = ?;";//Add OR usersEmail = ? if looking for email
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
 		header("location: ../Login.html?error=stmtfailed");
@@ -59,7 +59,7 @@ function UidExists($conn, $name) {
 
 function pwdGet($conn, $name) {
 	
-	$sql = "SELECT password FROM users WHERE usersName = ?;";
+	$sql = "SELECT password FROM users WHERE username = ?;";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
 		header("location: ../Login.html?error=stmtfailed");
@@ -84,7 +84,7 @@ function pwdGet($conn, $name) {
 
 function createUser($conn, $name, $pwd) {
 	
-	$sql = "INSERT INTO users (usersName, password) VALUES (?, ?);";
+	$sql = "INSERT INTO users (username, password) VALUES (?, ?);";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
 		header("location: ../Register.html?error=stmtfailed2");
@@ -96,7 +96,7 @@ function createUser($conn, $name, $pwd) {
 	mysqli_stmt_bind_param($stmt, "ss", $name, $hashedpwd);
 	mysqli_stmt_execute($stmt);
 	mysqli_stmt_close($stmt);
-	header("location: Login.html");
+	header("location: ../Login.html");
 	exit();
 }
 function noInputLogin($name, $pwd) {
@@ -108,6 +108,29 @@ function noInputLogin($name, $pwd) {
 		$return = false;
 	}
 	return $return;
+}
+function UidGet($conn, $name){
+	$sql = "SELECT userId FROM users WHERE username = ?;";
+	$stmt = mysqli_stmt_init($conn);
+	if (!mysqli_stmt_prepare($stmt, $sql)) {
+		header("location: ../Login.html?error=IDgetfailed");
+		exit();
+	}
+	
+	mysqli_stmt_bind_param($stmt, "s", $name);
+	mysqli_stmt_execute($stmt);
+	
+	$resultData = mysqli_stmt_get_result($stmt);
+	
+	if ($row = mysqli_fetch_assoc($resultData)) {
+		return $row;
+	}
+	else {
+		$result = false;
+		return $result;
+	}
+	
+	mysqli_stmt_close($stmt);
 }
 function loginUser($conn, $name, $pwd){
 	
@@ -122,14 +145,15 @@ function loginUser($conn, $name, $pwd){
 	$checkPwd = password_verify($pwd,$pwdHashed["password"]);
 	
 	if ($checkPwd == false) {
-		header("location: ../Login.html?error-wrongpassword= ");
+		header("location: ../Login.html?error-wrongpassword");
 		exit();
 	}
 
 	else if ($checkPwd == true) {
 		session_start();
-		$_SESSION["userName"] = $uidExists["userName"];
-		header("location: Userdetails.html");
+		$UID = UidGet($conn, $name);
+		$_SESSION['ID'] = $UID;
+		header("location: ../Userdetails.html");
 		exit();
 	}
 }

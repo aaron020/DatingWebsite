@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("includes/uniChecker.inc.php");
 include("connections.php");
 $Imgdir = "img/pfp/";
@@ -10,6 +11,7 @@ $targetFile = $Imgdir . $fileName;
 //   echo "Sorry, your file is too large.";
 // } 
 move_uploaded_file($_FILES['img']['tmp_name'], $targetFile);
+//$UID = $_SESSION['ID'];
 $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 $gender = $_POST['gender'];
@@ -25,7 +27,7 @@ $contact = $_POST['contact'];
 
 
 $query = "INSERT into userdetails (userId,firstname,lastname,gender,age,city,bio,university,job,hobbies,interests,contact) 
-	values ('1', '$firstname', '$lastname','$gender',$age,'$city','$bio','$uni','$job','$hobbies','$interest','$contact');";
+	values ('$_SESSION['ID']', '$firstname', '$lastname','$gender',$age,'$city','$bio','$uni','$job','$hobbies','$interest','$contact');";
 
 $imgQuery = "INSERT into images (userID, img_dir, img_name) values (1, '$Imgdir', '$fileName')";
 
