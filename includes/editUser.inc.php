@@ -1,9 +1,10 @@
 <?php
+session_start();
 include("../connections.php");
 include("uniChecker.inc.php");
 include("browse_users_functions.inc.php");
 
-$userId_LoggedIn = 8;
+$userId_LoggedIn = $_SESSION['ID'];
 $userDet = getUserDetails($userId_LoggedIn, $con);
 
 if(isset($_FILES['img']['name'])){
@@ -52,16 +53,20 @@ if(!mysqli_query($con,$query)){
 	echo("Error description: " . mysqli_error($con));
 }
 
+ob_start();
+header('Location: ../Menu.html');
+ob_end_flush();
+die();
 //Just for testing -- 
-echo $firstname;
-echo $lastname;
-echo $age;
-echo $city;
-echo $bio;
-echo $uni;
-echo $job;
-echo $hobbies;
-echo $contact;
+// echo $firstname;
+// echo $lastname;
+// echo $age;
+// echo $city;
+// echo $bio;
+// echo $uni;
+// echo $job;
+// echo $hobbies;
+// echo $contact;
 
 
 

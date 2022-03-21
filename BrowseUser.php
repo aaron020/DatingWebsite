@@ -5,7 +5,7 @@ include("connections.php");
 
 
 //The user that is logged in  11 to see all users
-$userId_LoggedIn =11;
+$userId_LoggedIn = $_SESSION['ID'];
 
 
 
@@ -15,8 +15,8 @@ $pref = getPreferences($userId_LoggedIn, $con);
 $ids = usersByPrefence($pref, $userId_LoggedIn,$con);
 $maxUsers = count($ids); // Amount of users found based off the preferences give
 
-echo $_SESSION['userCount'];
-print($maxUsers);
+// echo $_SESSION['userCount'];
+// print($maxUsers);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
   if($_POST['action'] == 'Yes'){

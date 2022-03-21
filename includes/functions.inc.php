@@ -132,6 +132,30 @@ function UidGet($conn, $name){
 	
 	mysqli_stmt_close($stmt);
 }
+//Query user details to see if they are already set
+function userDetailsEntered($conn, $userId_LoggedIn){
+	$query = "SELECT userId FROM userdetails where userId = $userId_LoggedIn";
+	$userIdArray = []; 
+	if ($stmt = $conn->prepare($query)) {
+
+	    $stmt->execute();
+
+	    $stmt->bind_result($userId);
+
+	    while ($stmt->fetch()) {
+	    	array_push($userIdArray, $userId);
+	    }
+	    $stmt->close();
+	}
+	if(empty($userIdArray)){
+		return false;
+	}else{
+
+		return true;
+	}
+}
+
+
 function loginUser($conn, $name, $pwd){
 	
 	$uidExists = UidExists($conn, $name);//Add another id parameter for email if login using email
@@ -153,7 +177,15 @@ function loginUser($conn, $name, $pwd){
 		session_start();
 		$UID = UidGet($conn, $name);
 		$_SESSION['ID'] = $UID['userId'];
-		header("location: ../Userdetails.html"/* .$_SESSION['ID'] */);
-		exit();
+
+		//Check to see if user details have been filled out already
+		if(userDetailsEntered($conn,$_SESSION['ID'])){
+			header("location: ../Menu.html");
+			exit();
+		}else{
+			header("location: ../Userdetails.html"/* .$_SESSION['ID'] */);
+			exit();
+		}
+
 	}
 }

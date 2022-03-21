@@ -1,7 +1,13 @@
 <?php
-session_start();
-$_SESSION['userCount'] = 0;
-echo "I see this";
+// session_start();
+// $_SESSION['userCount'] = 0;
+// echo "I see this";
+
+ob_start();
+header('Location: Login.html');
+ob_end_flush();
+die();
+
 
 
 ?>
