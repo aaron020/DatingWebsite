@@ -1,7 +1,12 @@
 <?php
-include("includes/editUser.inc.php");
-include("includes/browse_users_functions.inc.php");
+// include("includes/editUser.inc.php");
+// include("includes/browse_users_functions.inc.php");
 include("connections.php");
+include("includes/functions.inc.php");
+
+
+
+echo userDetailsEntered($con, 12);
 
 // $imgName = $_FILES['img']['name'];
 // $imgType = $_FILES['img']['type'];
@@ -22,7 +27,7 @@ include("connections.php");
 // print_r($ids);
 
 
-echo testValue("132131", "Default");
+// echo testValue("132131", "Default");
 
 // addLike(1,2, $con);
 
