@@ -5,7 +5,7 @@
 
 body{
   font-family: Arial,Helvetica,sans-serif;
-  background-color: #111;
+  /*background-color: #111; */
 }
 .sidenav {
   height: 100%;
@@ -18,7 +18,7 @@ body{
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
-}
+} 
 
 .sidenav a {
   padding: 8px 8px 8px 32px;
@@ -31,7 +31,7 @@ body{
 
 .sidenav a:hover {
   color: #f1f1f1;
-}
+} 
 
 .sidenav .closebtn {
   position: absolute;
@@ -39,7 +39,8 @@ body{
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
-}
+} 
+
 
 #main {
   transition: margin-left .5s;
@@ -82,10 +83,10 @@ body{
     transform: scale(1.09);
 }
 
-.row{
+/*.row{
     color: black;
     margin-left: 20px;
-}
+} */
 
 .header-image {
   background-image: url("C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\banner.jpg");
