@@ -77,7 +77,7 @@ function testValue($value, $default){
 		return $default;
 	}
 
-	if (!preg_match('/[^A-Za-z]/', $value)) // '/[^a-z\d]/i' should also work.
+	if (!preg_match('/[^A-Za-z]/', $value)) 
 	{
   		return $value;
 	}

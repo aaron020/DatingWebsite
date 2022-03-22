@@ -13,9 +13,10 @@ $userId_LoggedIn = $_SESSION['ID'];
 
 $pref = getPreferences($userId_LoggedIn, $con);
 $ids = usersByPrefence($pref, $userId_LoggedIn,$con);
+print_r($ids);
 $maxUsers = count($ids); // Amount of users found based off the preferences give
 
-// echo $_SESSION['userCount'];
+
 // print($maxUsers);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -36,7 +37,7 @@ if($_SESSION['userCount'] >= $maxUsers){
     exit();
 }
 
-
+echo $_SESSION['userCount'];
 
 
 $userDet = getUserDetails($ids[$_SESSION['userCount']], $con);
