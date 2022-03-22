@@ -1,13 +1,9 @@
 <?php 
-
-	include "dbh.inc.php";
-
 	if (isset($_POST["submit"])) {
 		
 		$name = $_POST["usersId"];
 		$pwd = $_POST["pwd"];
 		
-		require_once 'dbh.inc.php';
 		$serverName = "localhost";
 		$DBUserName = "root";
 		$dBPassword = "";
