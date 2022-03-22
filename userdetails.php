@@ -50,7 +50,7 @@ if(!mysqli_query($con,$query)){
 
 
 ob_start();
-header('Location: Menu.html');
+header('Location: Menu.php');
 ob_end_flush();
 die();
 

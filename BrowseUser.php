@@ -59,7 +59,7 @@ $imgSource = $imgData["img_dir"] . $imgData["img_name"];
   <div style="width: 40%;" class="users">
 
     <div class="heading">
-      <a href="Menu.html"> <button style="width: 20%;">Main Menu</button> </a>
+      <a href="Menu.php"> <button style="width: 20%;">Main Menu</button> </a>
 
       <img src="<?php echo $imgSource?>">
 

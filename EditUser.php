@@ -22,7 +22,7 @@ $userDet = getUserDetails($userId_LoggedIn, $con);
 
 
   <div class="box" style="width: 40%;">
-    <a href="Menu.html"> <button style="width: 20%;">Main Menu</button> </a>
+    <a href="Menu.php"> <button style="width: 20%;">Main Menu</button> </a>
       <h1>Edit User Details</h1>
       <hr>
       <!-- onsubmit="return validateForm() -->

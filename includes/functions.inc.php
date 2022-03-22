@@ -180,7 +180,7 @@ function loginUser($conn, $name, $pwd){
 
 		//Check to see if user details have been filled out already
 		if(userDetailsEntered($conn,$_SESSION['ID'])){
-			header("location: ../Menu.html");
+			header("location: ../Menu.php");
 			exit();
 		}else{
 			header("location: ../Userdetails.html"/* .$_SESSION['ID'] */);
