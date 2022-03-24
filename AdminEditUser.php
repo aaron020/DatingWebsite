@@ -1,13 +1,14 @@
 <?php
 session_start();
 include("includes/browse_users_functions.inc.php");
+include("includes/adminfunctions.inc.php");
 include("connections.php");
 
 
 //The user that is logged in - Get their details
-$userId_LoggedIn = $_SESSION['ID'];
-// $userId_LoggedIn = 1;
+$userId_LoggedIn = 1;
 $userDet = getUserDetails($userId_LoggedIn, $con);
+$username = getUsername($userId_LoggedIn, $con);
 ?>
 
 
@@ -17,23 +18,31 @@ $userDet = getUserDetails($userId_LoggedIn, $con);
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="style/InputStyle.css">
-  <title>Edit Details</title>
+  <title><?php echo textStyle($username["username"])?> Details</title>
 </head>
 <body>
 
 
   <div class="box" style="width: 40%;">
     <a href="Menu.php"> <button style="width: 20%;">Main Menu</button> </a>
-      <h1>Edit User Details</h1>
+      <h1 style="font-family: arial;"><?php echo textStyle($userDet["firstname"])?>  <?php echo textStyle($userDet["lastname"])?> Details</h1>
       <hr>
       <!-- onsubmit="return validateForm() -->
       
       <form action="includes/editUser.inc.php" name="CreateUser" method = "post"
        enctype="multipart/form-data"> 
+        <div class="userdets">
+        
+        <h3>Credentials:</h3>
+          <input type="text" name = "username" id="username"placeholder="JohnSmith123">
+          <input type="text" name = "password" id="password" placeholder="New Password">
+        </div>   
+                    
         <div class="image-button">
             <h3>Profile Pic:</h3>
             <input type="file" id="img" name="img" accept="image/*">
         </div>
+
 
         <div class="input-user">
           <h3>Name:</h3>
