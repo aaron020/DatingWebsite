@@ -58,11 +58,10 @@ ALTER TABLE `matches`
 CREATE TABLE `epiz_31203799_loveconnect`.`banned` ( `userId` INT(10) NOT NULL , 
 `time` VARCHAR(30) NULL DEFAULT NULL ) ENGINE = MyISAM; 
 
+CREATE TABLE `epiz_31203799_loveconnect`.`banned` ( `userId` INT(10) NOT NULL ) ENGINE = MyISAM; 
+
 ALTER TABLE `banned`
   ADD CONSTRAINT `banned_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`);
-
-CREATE TABLE `epiz_31203799_loveconnect`.`images` ( `userId` INT(10) NOT NULL , 
-`img_dir` VARCHAR(255) NULL DEFAULT NULL , `img_name` VARCHAR(255) NULL DEFAULT NULL ) ENGINE = MyISAM; 
 
 
 ALTER TABLE `images`
