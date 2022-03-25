@@ -6,43 +6,12 @@ include("connections.php");
 
 //The user that is logged in  11 to see all users
 $userId_LoggedIn = $_SESSION['ID'];
+// $userId_LoggedIn = 1;
 
 
+$userDet = getUserDetails($userId_LoggedIn, $con);
 
-
-
-$pref = getPreferences($userId_LoggedIn, $con);
-$ids = usersByPrefence($pref, $userId_LoggedIn,$con);
-// print_r($ids);
-$maxUsers = count($ids); // Amount of users found based off the preferences give
-
-
-// print($maxUsers);
-
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-  if($_POST['action'] == 'Yes'){
-    addLike($userId_LoggedIn, $ids[$_SESSION['userCount']], $con);
-  }
-  if($_POST['action'] == 'No'){
-    addNotInterested($userId_LoggedIn, $ids[$_SESSION['userCount']], $con);
-  }
-  $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
-}
-
-if(empty($_SESSION['userCount'])){
-    $_SESSION['userCount'] = 0;
-}
-if($_SESSION['userCount'] >= $maxUsers){
-    header('Location: noUsers.html');
-    exit();
-}
-
-// echo $_SESSION['userCount'];
-
-
-$userDet = getUserDetails($ids[$_SESSION['userCount']], $con);
-
-$imgData = getImg($ids[$_SESSION['userCount']], $con);
+$imgData = getImg($userId_LoggedIn, $con);
 $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
 ?>
 
@@ -52,7 +21,7 @@ $imgSource = $imgData["img_dir"] . $imgData["img_name"];
 <html>
 <head>
    <link rel="stylesheet" href="style/BrowseStyle.css">
-  <title>Browse Users</title>
+  <title>User Profile</title>
 </head>
 <body>
 
@@ -97,11 +66,8 @@ $imgSource = $imgData["img_dir"] . $imgData["img_name"];
       </div>
 
 
- 
-        <h3 style="text-align: center;">Interested?</h3>
-        <form method="post" action="BrowseUser.php">
-          <input type="submit" name="action" value="Yes">
-          <input type="submit" name="action" value="No">
+        <form action="EditUser.php">
+          <input type="submit" name="action" value="Edit Profile">
         </form>
     </div>
   </div>

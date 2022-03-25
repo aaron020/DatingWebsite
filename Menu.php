@@ -28,6 +28,7 @@ $_SESSION['userCount'] = 0;
 
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="UserProfile.php">My Profile</a>
   <a href="BrowseUser.php">Browse Users</a>
   <a href="changePreferences.html">Edit Preferences</a>
   <a href="viewMatches.html">View Matches</a>
