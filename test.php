@@ -1,12 +1,25 @@
 <?php
+session_start();
 // include("includes/editUser.inc.php");
-// include("includes/browse_users_functions.inc.php");
+include("includes/browse_users_functions.inc.php");
 include("connections.php");
-include("includes/functions.inc.php");
+//include("includes/functions.inc.php");
 
+$userId_LoggedIn = 1;
+$pref = getPreferences($userId_LoggedIn, $con);
+ //All the Id's of users that the user logged in should be interested in
+$ids = usersByPrefence($pref, $userId_LoggedIn,$con);
+$_SESSION['ids'] = $ids;
 
+print_r($_SESSION['ids']);
+unset($_SESSION['ids']);
 
-echo userDetailsEntered($con, 12);
+$pref2 = getPreferences(2, $con);
+ //All the Id's of users that the user logged in should be interested in
+$ids2 = usersByPrefence($pref2, 2,$con);
+$_SESSION['ids'] = $ids2;
+
+print_r($_SESSION['ids']);
 
 // $imgName = $_FILES['img']['name'];
 // $imgType = $_FILES['img']['type'];
