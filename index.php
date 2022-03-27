@@ -4,7 +4,7 @@
 // echo "I see this";
 
 ob_start();
-header('Location: Login.html');
+header('Location: Login.php');
 ob_end_flush();
 die();
 
