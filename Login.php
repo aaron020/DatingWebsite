@@ -1,3 +1,12 @@
+<?php
+session_start();
+if($_COOKIE["Logged_In"] != NULL){
+	$_SESSION['ID'] = $_COOKIE["Logged_In"];
+	header("location: ../Menu.php");
+	exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <head>

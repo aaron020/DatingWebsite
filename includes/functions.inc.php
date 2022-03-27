@@ -177,7 +177,9 @@ function loginUser($conn, $name, $pwd){
 		session_start();
 		$UID = UidGet($conn, $name);
 		$_SESSION['ID'] = $UID['userId'];
-
+		$cookie_name = "Logged_In";
+		$cookie_value = $UID['userId'];
+		setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 		//Check to see if user details have been filled out already
 		if(userDetailsEntered($conn,$_SESSION['ID'])){
 			header("location: ../Menu.php");

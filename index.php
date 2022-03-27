@@ -19,7 +19,7 @@ die();
 	<title></title>
 </head>
 <body>
-	<h3><a href="Login.html">Login</a> </h3>
+	<h3><a href="Login.php">Login</a> </h3>
 	<h3><a href="Register.html">Register</a> </h3>
 	<h3><a href="Userdetails.html">Userdetails</a> </h3>
 	<h3><a href="Menu.html">Menu</a> </h3>
