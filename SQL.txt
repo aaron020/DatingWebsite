@@ -2,6 +2,8 @@ CREATE TABLE `epiz_31203799_loveconnect`.`users` ( `userId` INT(10) NULL DEFAULT
  `username` VARCHAR(12) NULL DEFAULT NULL , `password` VARCHAR(30) NULL DEFAULT NULL , 
 `isAdmin` BOOLEAN NULL DEFAULT FALSE , PRIMARY KEY (`userId`)) ENGINE = MyISAM; 
 
+ALTER TABLE users
+	ADD COLUMN “isBanned” BOOLEAN DEFAULT FALSE;
 
 CREATE TABLE `epiz_31203799_loveconnect`.`userdetails` ( `userId` INT(10) NOT NULL , 
 `firstname` VARCHAR(16) NULL DEFAULT NULL , `lastname` VARCHAR(16) NULL DEFAULT NULL , 
