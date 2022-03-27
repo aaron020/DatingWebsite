@@ -59,7 +59,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
 }
 
-print_r($_SESSION['userIds']);
+
 ?>
 
 
