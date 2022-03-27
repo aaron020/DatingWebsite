@@ -33,7 +33,7 @@ $_SESSION['userCount'] = 0;
   <a href="changePreferences.html">Edit Preferences</a>
   <a href="viewMatches.html">View Matches</a>
   <a href="EditUser.php">Edit Profile</a>
-  <a href="#">Favourites</a>
+  <a href="favourites.php">Favourites</a>
   <a href="#">Contact Us</a>
 </div>
 

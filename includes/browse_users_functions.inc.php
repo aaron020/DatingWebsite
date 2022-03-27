@@ -185,6 +185,8 @@ function bannedUsers($con){
 	return $bannedUser;
 }
 
+
+//All liked users from the user logged in
 function likedUsers($userId_LoggedIn ,$con){
 	$query = "SELECT userId_Received FROM likes WHERE userId_Sent = $userId_LoggedIn;";
 	$liked = [];
@@ -199,6 +201,7 @@ function likedUsers($userId_LoggedIn ,$con){
 	return $liked;
  }
 
+//All users the user logged in is not interested in
 function notInterestedUsers($userId_LoggedIn ,$con){
 	$query = "SELECT userId_Received FROM not_interested WHERE userId_Sent = $userId_LoggedIn;";
 	$notInterested = [];

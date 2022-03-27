@@ -31,7 +31,9 @@ die();
 	<h3><a href="EditUser.php">Edit User</h3>
 	<h3><a href="AdminEditUser.php">Admin Edit User</h3>	
 	<h3><a href="test.php">Test</a> </h3>
-	<h3><a href="UserProfile.php">User Profile</a> </h3>
+	<h3><a href="UserProfile.php">User Profile</a>
+	<h3><a href="favourites.php">Favs</a> 	
+	 </h3>
 	
 
 </body>

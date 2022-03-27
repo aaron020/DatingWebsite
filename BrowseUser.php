@@ -6,44 +6,60 @@ include("connections.php");
 
 //The user that is logged in  11 to see all users
 $userId_LoggedIn = $_SESSION['ID'];
+$userDet;
+$imgData;
+$imgSource;
 
-
-
-
-
-$pref = getPreferences($userId_LoggedIn, $con);
-$ids = usersByPrefence($pref, $userId_LoggedIn,$con);
-// print_r($ids);
-$maxUsers = count($ids); // Amount of users found based off the preferences give
-
-
-// print($maxUsers);
-
+//The Yes or No Button are clicked
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
   if($_POST['action'] == 'Yes'){
-    addLike($userId_LoggedIn, $ids[$_SESSION['userCount']], $con);
+    addLike($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['userCount']], $con);
   }
   if($_POST['action'] == 'No'){
-    addNotInterested($userId_LoggedIn, $ids[$_SESSION['userCount']], $con);
+    addNotInterested($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['userCount']], $con);
   }
   $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
-}
 
-if(empty($_SESSION['userCount'])){
-    $_SESSION['userCount'] = 0;
-}
-if($_SESSION['userCount'] >= $maxUsers){
+  if($_SESSION['userCount'] >= $_SESSION['maxUsers']){
     header('Location: noUsers.html');
     exit();
+  }
+
+
+  $userDet = getUserDetails($_SESSION['userIds'][$_SESSION['userCount']], $con);
+  $imgData = getImg($_SESSION['userIds'][$_SESSION['userCount']], $con);
+  $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+
+
+}else{
+  //The page is loaded for the first time
+
+  //An array of the user preferences
+  $pref = getPreferences($userId_LoggedIn, $con);
+  //All the Id's of users that the user logged in should be interested in
+  $ids = usersByPrefence($pref, $userId_LoggedIn,$con);
+
+  if(isset($_SESSION['userIds'])){
+    //Session var ia already set - remove all vals + give it new ones
+    unset($_SESSION['userIds']);
+    $_SESSION['userIds'] = $ids;
+  }else{
+    //Session var is not set - so we set it
+    $_SESSION['userIds'] = $ids;
+  }
+
+  $_SESSION['maxUsers'] = count($_SESSION['userIds']);
+
+  if(empty($_SESSION['userCount'])){
+    $_SESSION['userCount'] = 0;
+  }
+  $userDet = getUserDetails($_SESSION['userIds'][$_SESSION['userCount']], $con);
+  $imgData = getImg($_SESSION['userIds'][$_SESSION['userCount']], $con);
+  $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
 }
 
-// echo $_SESSION['userCount'];
 
-
-$userDet = getUserDetails($ids[$_SESSION['userCount']], $con);
-
-$imgData = getImg($ids[$_SESSION['userCount']], $con);
-$imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
 ?>
 
 
