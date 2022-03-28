@@ -37,7 +37,7 @@ function UidExists($conn, $name) {
 	$sql = "SELECT * FROM users WHERE username = ?;";//Add OR usersEmail = ? if looking for email
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-		header("location: ../Login.html?error=stmtfailed");
+		header("location: ../Login.php?error=stmtfailed");
 		exit();
 	}
 	
@@ -62,7 +62,7 @@ function pwdGet($conn, $name) {
 	$sql = "SELECT password FROM users WHERE username = ?;";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-		header("location: ../Login.html?error=stmtfailed");
+		header("location: ../Login.php?error=stmtfailed");
 		exit();
 	}
 	
@@ -96,7 +96,7 @@ function createUser($conn, $name, $pwd) {
 	mysqli_stmt_bind_param($stmt, "ss", $name, $hashedpwd);
 	mysqli_stmt_execute($stmt);
 	mysqli_stmt_close($stmt);
-	header("location: ../Login.html");
+	header("location: ../Login.php");
 	exit();
 }
 function noInputLogin($name, $pwd) {
@@ -113,7 +113,7 @@ function UidGet($conn, $name){
 	$sql = "SELECT userId FROM users WHERE username = ?;";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-		header("location: ../Login.html?error=IDgetfailed");
+		header("location: ../Login.php?error=IDgetfailed");
 		exit();
 	}
 	
@@ -162,14 +162,14 @@ function loginUser($conn, $name, $pwd){
 	$passCheck = pwdGet($conn, $name);
 	
 	if ($uidExists == false) {
-		header("location: ../Login.html?error=wronglogin");
+		header("location: ../Login.php?error=wronglogin");
 		exit();
 	}
 	$pwdHashed = $passCheck;
 	$checkPwd = password_verify($pwd,$pwdHashed["password"]);
 	
 	if ($checkPwd == false) {
-		header("location: ../Login.html?error-wrongpassword");
+		header("location: ../Login.php?error-wrongpassword");
 		exit();
 	}
 
