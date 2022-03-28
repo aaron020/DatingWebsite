@@ -25,12 +25,12 @@
 		require_once 'functions.inc.php';
 		
 		if (noInputLogin($name, $pwd) != false) {
-			header("location: ../Login.html?error=emptyinput");
+			header("location: ../Login.php?error=emptyinput");
 			exit();
 		}
 		loginUser($conn, $name, $pwd);
 	}
 	else {
-		header("location: ../Login.html?error=dunno");
+		header("location: ../Login.php?error=dunno");
 		exit();
 	}
