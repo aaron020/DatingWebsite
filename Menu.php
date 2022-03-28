@@ -27,6 +27,7 @@ $_SESSION['userCount'] = 0;
 
 
 <div id="mySidenav" class="sidenav">
+<input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..." title="Search a user">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="UserProfile.php">My Profile</a>
   <a href="BrowseUser.php">Browse Users</a>
