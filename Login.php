@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_COOKIE["Logged_In"] != NULL){
+if(isset($_COOKIE["Logged_In"])){
 	$_SESSION['ID'] = $_COOKIE["Logged_In"];
 	header("location: ../Menu.php");
 	exit();
