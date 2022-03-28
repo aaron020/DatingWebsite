@@ -1,44 +1,67 @@
 <?php
 session_start();
 if(isset($_COOKIE["Logged_In"])){
-	$_SESSION['ID'] = $_COOKIE["Logged_In"];
-	header("location: ../Menu.php");
-	exit();
+  $_SESSION['ID'] = $_COOKIE["Logged_In"];
+  header("location: ../Menu.php");
+  exit();
 }
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-   <link rel="stylesheet" href="LoginStyle.css">
-  <title>Login</title>
-</head>
-<body style="margin: 0px; padding: 0px;">
-  <h1 style="font-family: Brush Script MT, Brush Script Std, cursive; font-size: 100px; margin: 5px;">Love Connect</h1>
-  <div class="login">
 
-    <div class="heading">
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      <h1>Sign in</h1>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="./style.css">
 
-      <form action="includes/login.inc.php" method="post">
+    <title>Login</title>
+  </head>
+  <body>
+    <section class="login py-5 ">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <img src="images/website/hands.jpeg" class="img-fluid" alt="Website Logo">
+          </div>          
+          <div class="col-lg-7 text-center py-3">
+            <h1>Login</h1>
+            <form action="includes/login.inc.php" method="post">
+              <div class="form-row py-3 pt-5">
+                <div class="offset-1 col-lg-10">
+                  <input type="text" class="inp" name="usersId" placeholder="Username">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="offset-1 col-lg-10">
+                  <input type="password" class="inp" name="pwd" placeholder="Password">
+                </div>
+              </div>
+              <div class="form-row pt-5">
+                <div class="offset-1 col-lg-10">
+                  <button type="submit" name="submit" class="submit">Login</button>
+                </div>
+              </div>
+              <div class="form-row pt-5">
+                <div class="offset-1 col-lg-10">
+                  <a href="Register.html">Register</a>
+                </div>
+              </div>
+            </form>
+            
+          </div>
 
-        <div class="input-user">
-          <input type="text" class="form-control" name="usersId" placeholder="Username">
+
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="input-password">
-          <input type="password" class="form-control" name="pwd" placeholder="Password">
-        </div>
 
-        <div class="submit-button">
-          <button type="submit" name="submit" class="float">Sign In</button>
-        </div>
 
-        <p><a href="Register.html">Register</a>   </p>
-        
-      </form>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
