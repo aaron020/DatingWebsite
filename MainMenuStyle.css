@@ -32,6 +32,12 @@ body{
   display: block;
 }  
 */
+#mySearch {
+  width: 100%;
+  font-size: 18px;
+  padding: 11px;
+  border: 1px solid #ddd;
+}
 
 .banner{
   background-image: url('https://wallpaperaccess.com/full/1166813.jpg');
