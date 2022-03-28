@@ -2,7 +2,7 @@
 session_start();
 if(isset($_COOKIE["Logged_In"])){
   $_SESSION['ID'] = $_COOKIE["Logged_In"];
-  header("location: ../Menu.php");
+  header("location: Menu.php");
   exit();
 }
 ?>

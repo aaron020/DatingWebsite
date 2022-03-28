@@ -50,6 +50,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   }
 
   $_SESSION['maxUsers'] = count($_SESSION['userIds']);
+  
+  if($_SESSION['userCount'] >= $_SESSION['maxUsers']){
+    header('Location: noUsers.html');
+    exit();
+  }
 
   if(empty($_SESSION['userCount'])){
     $_SESSION['userCount'] = 0;

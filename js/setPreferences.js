@@ -1,4 +1,5 @@
 function validateAge() {
+  console.log("Age Checked");
   correct = true;
   var age_from = document.forms["setPreferences"]["age_from"].value;
   var age_to = document.forms["setPreferences"]["age_to"].value;

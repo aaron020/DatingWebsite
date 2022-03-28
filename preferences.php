@@ -1,11 +1,13 @@
 <?php
 session_start();
 include("connections.php");
+include("includes/uniChecker.inc.php");
 $userId_LoggedIn = $_SESSION['ID'];
+
 
 $gender = ($_POST['gender']);
 $hobbies = $_POST['hobbies'];
-$uni = $_POST['uni'];
+$uni = universityChecker($_POST['uni']);
 $city = $_POST['city'];
 $age_low =  $_POST['age_from'];
 $age_high =  $_POST['age_to'];
@@ -27,6 +29,15 @@ if(!userPreferencesEntered($con,$userId_LoggedIn)){
 		echo("Error description: " . mysqli_error($con));
 	}
 }
+
+
+
+// echo $gender;
+// echo $hobbies;
+// echo $uni;
+// echo $city;
+// echo $age_low;
+// echo $age_high;
 
 
 
@@ -62,11 +73,4 @@ function userPreferencesEntered($conn, $userId_LoggedIn){
 }
 
 //Testing purposes 
-// echo $gender;
-// echo $hobbies;
-// echo $uni;
-// echo $city;
-// echo $age_low;
-// echo $age_high;
-
 
