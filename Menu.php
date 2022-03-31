@@ -1,6 +1,8 @@
 <?php
 session_start();
 $_SESSION['userCount'] = 0;
+
+include("connections.php");
 ?>
 
 
@@ -43,21 +45,44 @@ $_SESSION['userCount'] = 0;
 </div>
 	
 
-	
+	<form id="form"> 
+  <input type="search" id="search-box" placeholder="Search...">
+  <button>Search</button>
+</form>
+
     <!--Browse Users-->
-    <div class="row">
-      <h2>BROWSE USERS</h2>
-      <div class="row_posters">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl5.jpg" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\boy6.jpg" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl.webp" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\boy3.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\boy4.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl3.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl4.jpg" alt="" class="row_poster row_posterLarge">			
-	  	<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl6.jpg" alt="" class="row_poster row_posterLarge">
-	  </div>
+<div class="row">
+    <h2>BROWSE USERS</h2>
+    <div class="row_posters">
+<?php 
+
+$sql = "SELECT img_name FROM images";
+$result = mysqli_query($con,$sql); //potential error
+if(mysqli_num_rows($result)> 0){
+    while($fetch = mysqli_fetch_assoc($result)){
+        $image = $image + 1;
+    ?>
+
+<!--<div class="nameDiv"> -->
+    <?php $finalImg = "./img/pfp/" . $fetch["img_name"]; ?>
+
+<img src="<?php echo $finalImg; ?>" alt="" class="row_poster row_posterLarge">
+
+<!--<h6>Dean</h6>-->
+    <?php
+  // echo "Dean";
+
+    
+    $finalImg = "./img/pfp/" . $fetch["img_name"];
+
+    ?>
+<!--</div> -->
+    <?php
+    }
+}
+?>
     </div>
+</div>
 	
 	 <!--View Matches-->
     <div class="row">
@@ -104,6 +129,8 @@ function viewMatches(){
 
 
 }
+
+
 </script>
    
 </body>
