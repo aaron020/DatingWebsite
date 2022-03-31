@@ -39,7 +39,7 @@ function getImg($userId, $con){
 	if(mysqli_num_rows($result) > 0){
 		return mysqli_fetch_assoc($result);
 	}else{
-		echo("error");
+		return null;
 	}
 }
 

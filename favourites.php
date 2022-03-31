@@ -42,63 +42,104 @@ if($_SESSION['userLiked'] >= $maxUsers){
 $userDet = getUserDetails($liked[$_SESSION['userLiked']], $con);
 
 $imgData = getImg($liked[$_SESSION['userLiked']], $con);
-$imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+if($imgData == null){
+  $imgSource = "img/default/" . "default.png"; 
+}else{
+  $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+}
 ?>
 
 
 
-<!DOCTYPE html>
-<html>
-<head>
-   <link rel="stylesheet" href="style/BrowseStyle.css">
-  <title>Browse Users</title>
-</head>
-<body>
-
-  <div style="width: 40%;" class="users">
-
-    <div class="heading">
-      <a href="Menu.php"> <button style="width: 20%;">Main Menu</button> </a>
-
-      <img src="<?php echo $imgSource?>">
 
 
 
-      <div class="NameLocation">
-        <h2>
-          <?php
-            echo textStyle($userDet["firstname"]) . " , " . $userDet["age"];
-          ?> 
-        </h2>
-        <p style="text-align: left;">from <?php echo textStyle($userDet["city"])?></p>
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style/user_style.css">
+
+  <title>User</title>
+  </head>
+  <body>
+    <section class="User py-5">
+      <div class="container">
+        <div class="row">
+
+
+          <div class="col-lg-5 pt-5 text-center">
+            <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture"
+            onerror=this.src="img/default/default.png">
+            <h1><?php
+            echo textStyle($userDet["firstname"]);?></h1>
+            <h2><?php echo textStyle($userDet["city"]) . " , " . $userDet["age"];?></h2>
+            <p><?php echo textStyle($userDet["job"])?></p>
+          </div>
+
+
+          <div class="col-lg-7 text-center py-3">
+
+              <div class="py-3 pt-5">
+                <div class="offset-1 col-lg-10">
+                    <p style="word-wrap:break-word"><?php echo $userDet["bio"]?></p>
+                </div>
+              </div>
+
+
+
+              <div class="py-3 pt-5">
+                <div class="offset-1 col-lg-10">
+                  <h4>
+                    <?php 
+                    $arrayHobbies = groupHobbies($userDet["hobbies"]);
+                    foreach ($arrayHobbies as $value) {
+                      echo textStyle($value) . "    ";
+                   } 
+
+                   ?>
+                  </h4>
+                </div>
+              </div>
+
+
+              <div class="py-3">
+                <div class="offset-1 col-lg-10">
+                  <p><?php echo textStyle($userDet["university"])?></p>
+                </div>
+              </div>   
+              <form method="post" action="favourites.php">
+                <div class="form-row pt-5">
+                  <div class="offset-1 col-lg-10">
+                    <input type="submit" name="action" class="submit" value="Next">
+                  </div>
+                </div>
+              </form>
+              <div class="form-row pt-5">
+                <div class="offset-1 col-lg-10">
+                  <a href="Menu.php">
+                    Menu
+                  </a>
+                </div>
+              </div>
+            </form>
+            
+          </div>
+
+
+          </div>
+        </div>
       </div>
-
-      <div class="JobUni">
-        <p style="padding: 10px;"><?php echo textStyle($userDet["job"])?></p>
-        <p style="padding: 10px;"><?php echo textStyle($userDet["university"])?></p>
-      </div>
-
-      <div class="hobbies">
-        <p style="padding: 20px;">
-          <?php 
-          $arrayHobbies = groupHobbies($userDet["hobbies"]);
-          foreach ($arrayHobbies as $value) {
-             echo textStyle($value) . "    ";
-           } 
-
-         ?>
-         </p>
-      </div>
+    </section>
 
 
-      <div class="JobUni">
-        <p style="padding: 20px;"><?php echo $userDet["bio"]?></p>
-      </div>
 
-        <form method="post" action="favourites.php">
-          <input type="submit" name="action" value="Next">
-        </form>
-    </div>
-  </div>
-</body>
+  </body>
 </html>
