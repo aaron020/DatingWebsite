@@ -28,7 +28,7 @@ $username = getUsername($userId_LoggedIn, $con);
   </head>
   <body>
     <div class="container ml-6">
-      <h1 class="heading">Edit User</h1>
+      <h1 class="heading">Edit User - <?php echo $username["username"]?></h1>
       <form class="row g-3" action="includes/admin_editUser.inc.php"  method = "post" enctype="multipart/form-data">
         <div class="mt-5 col-md-12">
           <a href="Menu.php">Return</a>
@@ -117,6 +117,36 @@ $username = getUsername($userId_LoggedIn, $con);
       </div> 
 
       </form>
+    </div>
+
+
+
+    <div class="container ml-6 mt-5 mb-5">
+      <h1 class="heading">Ban User</h1>
+       <form class="row g-3" action="#"  method = "post">
+        <?php $banned = bannedText($userId_LoggedIn,$con) ?>
+        <div style="color: <?php if($banned == "UnBanned"){echo "#00ff00";} 
+        else if($banned == "Temporarily Banned"){echo "orange";}else{echo "red";}?>;" class="mt-5 col-md-12">
+          <p>User Ban Status: <?php echo $banned ?></p>
+        </div>
+
+        <div class="mt-5 col-md-12">
+          <label for="gender">Time Period</label>
+          <select class="form-control" id="gender" name="gender">
+            <option>1 Day</option>
+            <option>3 Days</option>
+            <option>1 Week</option>
+            <option>1 Month</option>
+            <option>Forever</option>
+            <option>UnBan</option>
+          </select>
+        </div>
+
+        <div class="mt-5 mb-5 col-md-12 text-center">
+          <button type="submit" class="submit-button">Update</button>
+        </div> 
+       </form>
+      
     </div>
 
   </body>
