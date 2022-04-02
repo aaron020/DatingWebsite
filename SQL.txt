@@ -2,9 +2,6 @@ CREATE TABLE `epiz_31203799_loveconnect`.`users` ( `userId` INT(10) NULL DEFAULT
  `username` VARCHAR(12) NULL DEFAULT NULL , `password` VARCHAR(30) NULL DEFAULT NULL , 
 `isAdmin` BOOLEAN NULL DEFAULT FALSE , PRIMARY KEY (`userId`)) ENGINE = MyISAM; 
 
-ALTER TABLE users
-	ADD COLUMN isBanned BOOLEAN DEFAULT FALSE;
-
 CREATE TABLE `epiz_31203799_loveconnect`.`userdetails` ( `userId` INT(10) NOT NULL , 
 `firstname` VARCHAR(16) NULL DEFAULT NULL , `lastname` VARCHAR(16) NULL DEFAULT NULL , 
 `gender` VARCHAR(16) NULL DEFAULT NULL , 
@@ -56,13 +53,13 @@ ALTER TABLE `matches`
 
 ALTER TABLE `matches`
   ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`userId_Received`) REFERENCES `users` (`userId`);
-/*
+
 CREATE TABLE `epiz_31203799_loveconnect`.`banned` ( `userId` INT(10) NOT NULL , 
-`time` VARCHAR(30) NULL DEFAULT NULL ) ENGINE = MyISAM; 
+`time` BIGINT(20) NULL DEFAULT NULL ) ENGINE = MyISAM; 
 
 ALTER TABLE `banned`
   ADD CONSTRAINT `banned_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`);
-*/
+
 CREATE TABLE `epiz_31203799_loveconnect`.`images` ( `userId` INT(10) NOT NULL , 
 `img_dir` VARCHAR(255) NULL DEFAULT NULL , `img_name` VARCHAR(255) NULL DEFAULT NULL ) ENGINE = MyISAM; 
 
