@@ -232,3 +232,23 @@ function addNotInterested($userId_LoggedIn, $userId_Received, $con){
 	}
 }
 
+//Returns an array of users that best matched for certain user
+function bestMatch($userId_LoggedIn, $con){
+	$userDet = getUserDetails($userId_LoggedIn, $con);
+	if($userDet['interests'] == 'Both'){
+		$userDet['interests'] = '%';
+	}
+	$queryFirst = "SELECT userId FROM userdetails WHERE gender LIKE '{$userDet['interests']}' AND city LIKE '{$userDet['city']}' AND university LIKE '{$userDet['university']}'";
+	$bestMatch = [];
+	if($stmt = $con->prepare($queryFirst)){
+		$stmt->execute();
+		$stmt->bind_result($userId_Received);
+		while($stmt->fetch()){
+			array_push($bestMatch, $userId_Received);
+		}
+		$stmt->close();
+	}
+	return $bestMatch;
+
+}
+

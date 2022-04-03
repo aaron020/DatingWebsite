@@ -37,6 +37,7 @@ include("connections.php");
   <a href="viewMatches.html">View Matches</a>
   <a href="EditUser.php">Edit Profile</a>
   <a href="favourites.php">Favourites</a>
+  <a href="bestMatch.php">Best Match</a>
   <a href="includes/logout.inc.php">Log Out</a>
 </div>
 
