@@ -42,3 +42,17 @@ input[type=text]{
 	transition: 0.5s;
 
 }
+
+.submit{
+	height: 50px;
+	width:  50%;
+	border-radius: 60px;
+	font-weight: 600;
+}
+
+.submit:hover{
+	background: black;
+	color: white;
+	transition: 0.5s;
+
+}

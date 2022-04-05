@@ -7,12 +7,17 @@ include("browse_users_functions.inc.php");
 $userId_LoggedIn = $_SESSION['ID'];
 $userDet = getUserDetails($userId_LoggedIn, $con);
 
-if(isset($_FILES['img']['name'])){
+
+if($_FILES['img']['size'] != 0){
+	echo "We enter here";
 	//First Remove the og pic
 	$imgData = getImg($userId_LoggedIn, $con);
-	$imgSource = "../". $imgData["img_dir"] . $imgData["img_name"]; 
-	//Delete the image
-	unlink($imgSource);
+	if(isset($imgData)){
+		$imgSource = "../". $imgData["img_dir"] . $imgData["img_name"]; 
+		//Delete the image
+		unlink($imgSource);
+	}
+
 
 
 

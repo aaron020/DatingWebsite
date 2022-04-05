@@ -1,77 +1,61 @@
 <?php
 session_start();
+include("advancedSearch.php");
 include("includes/browse_users_functions.inc.php");
 include("connections.php");
 
-
-//The user that is logged in  11 to see all users
 $userId_LoggedIn = $_SESSION['ID'];
 $userDet;
 $imgData;
 $imgSource;
 
-//The Yes or No Button are clicked
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
+if($_POST['action'] == 'Find User'){
+    $firstname = $_POST['firstname'];
+   $lastname = $_POST['lastname'];
+   $userId = advancedSearch($firstname,$lastname,$con);
+   if($userId['0'] != ""){
+    $_SESSION['userSearched'] = $userId['0'];
+    $userDet = getUserDetails($userId['0'], $con);
+    $imgData = getImg($userId['0'], $con);
+    if($imgData == null){
+      $imgSource = "img/default/" . "default.png"; 
+    }else{
+      $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+    }
+   }else{
+      ob_start();
+       header('Location: noUsers.html');
+     ob_end_flush();
+     die();
+   }
 
-  if($_POST['action'] == 'Yes'){
-    addLike($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
-  }
-  if($_POST['action'] == 'No'){
-    addNotInterested($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
-  }
-  $_SESSION['BestuserCount'] = $_SESSION['BestuserCount'] + 1;
-
-  if($_SESSION['BestuserCount'] >= $_SESSION['maxUsers']){
-    header('Location: noUsers.html');
-    exit();
-  }
-
-
-  $userDet = getUserDetails($_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
-  $imgData = getImg($_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
-  if($imgData == null){
-  $imgSource = "img/default/" . "default.png"; 
-  }else{
-    $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
-  }
-
-
-
-}else{
-  //The page is loaded for the first time
-
-  //All the Id's of users that the user logged in should be interested in
-  $ids = bestMatch($userId_LoggedIn, $con);
-
-  if(isset($_SESSION['userIds'])){
-    //Session var ia already set - remove all vals + give it new ones
-    unset($_SESSION['userIds']);
-    $_SESSION['userIds'] = $ids;
-  }else{
-    //Session var is not set - so we set it
-    $_SESSION['userIds'] = $ids;
-  }
-
-  $_SESSION['maxUsers'] = count($_SESSION['userIds']);
-  if(empty($_SESSION['BestuserCount'])){
-    $_SESSION['BestuserCount'] = 0;
-  }
-  if($_SESSION['BestuserCount'] >= $_SESSION['maxUsers']){
-    header('Location: noUsers.html');
-    exit();
-  }
-
-
-  $userDet = getUserDetails($_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
-  $imgData = getImg($_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
-
-  if($imgData == null){
-    $imgSource = "img/default/" . "default.png"; 
-  }else{
-    $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+}
+//Check if the user has already been liked
+$wasLiked = false;
+$liked = likedUsers($userId_LoggedIn, $con);
+if($liked){
+  foreach($liked as $value){
+    if($value == $_SESSION['userSearched']){
+      $wasLiked = true;
+      }
   }
 }
 
+
+if($_POST['action'] == 'Yes'){
+  addLike($userId_LoggedIn, $_SESSION['userSearched'], $con);
+  ob_start();
+  header('Location: changePreferences.html');
+  ob_end_flush();
+  die();
+}
+
+if($_POST['action'] == 'No'){
+  ob_start();
+  header('Location: changePreferences.html');
+  ob_end_flush();
+  die();
+}
 
 ?>
 
@@ -90,7 +74,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style/user_style.css">
 
-  <title>Browse Users</title>
+  <title>User</title>
   </head>
   <body>
     <section class="User py-5">
@@ -137,8 +121,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                   <p><?php echo textStyle($userDet["university"])?></p>
                 </div>
               </div>   
-              <form method="post" action="BrowseUser.php">
+              <form action="searchedUserProfile.php" method="post">
                 <div class="form-row pt-5">
+                  <div class="offset-1 col-lg-10">
+                    <h3>Interested ?</h3>
+                    <small><?php 
+                      if($wasLiked == true){
+                        echo "You have already liked this user!";
+                      }
+                    ?></small>
+                  </div>
                   <div class="offset-1 col-lg-10">
                     <input type="submit" class = "submit" name="action" value="Yes">
                     <input type="submit" class = "submit" name="action" value="No">
@@ -147,8 +139,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
               </form>
               <div class="form-row pt-5">
                 <div class="offset-1 col-lg-10">
-                  <a href="Menu.php">
-                    Menu
+                  <a href="changePreferences.html">
+                    Return to Search
                   </a>
                 </div>
               </div>

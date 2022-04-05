@@ -10,12 +10,12 @@
 
     <link rel="stylesheet" type="text/css" href="style/userdetails.css">
 
-    <title>Preferences</title>
+    <title>Search Users</title>
   </head>
   <body>
 
     <div class="container ml-6">
-      <h1 class="heading">Set Preferences</h1>
+      <h1 class="heading">Search Users</h1>
       <form class="row g-3" action="preferences.php" name="setPreferences" method = "post"
        onsubmit="return validateAge()">
         <script type="text/javascript" src="js/setPreferences.js"></script>
@@ -72,12 +72,27 @@
           <label for="hobbies" name="hobbies" class="form-label">Hobbies</label>
           <input type="text" class="form-control" id="hobbies" name= "hobbies" maxlength="100">
           <small>Enter hobbies like : Running,Swimming,Climbing. Maximum of 3</small>
-        </div> 
-
+        </div>  
       <div class="mt-5 mb-5 col-md-12 text-center">
-        <button type="submit" class="submit-button">Browse Users</button>
+        <button type="submit" class="submit-button">Search</button>
       </div> 
+      </form>
+    </div>
+    <div class="container ml-6 mt-5 mb-5">
+      <h1 class="heading">Advanced Search</h1>
+      <form class="row g-3" action="searchedUserProfile.php" method="post">
+        <div class="mt-5 mb-5 col-md-6">
+          <label for="firstname" name="firstname" class="form-label">Firstname</label>
+          <input type="text" class="form-control" id="firstname" name= "firstname" maxlength="30" required>
+        </div>      
 
+        <div class="mt-5 mb-5 col-md-6">
+          <label for="lastname" name="lastname" class="form-label">Lastname</label>
+          <input type="text" class="form-control" id="lastname" name= "lastname" maxlength="60" required>
+        </div> 
+          <div class="mt-5 mb-5 col-md-12 text-center">
+            <input type="submit" class = "submit" name="action" value="Find User">
+          </div>                  
       </form>
     </div>
 

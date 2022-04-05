@@ -9,12 +9,14 @@ $userId_LoggedIn = 1;
 $userDet = getUserDetails($userId_LoggedIn, $con);
 $username = getUsername($userId_LoggedIn,$con);
 
-if($_FILES['img']['size'] == 0 && $_FILES['img']['error'] == 0){
+if($_FILES['img']['size'] != 0){
 	//First Remove the og pic
 	$imgData = getImg($userId_LoggedIn, $con);
-	$imgSource = "../". $imgData["img_dir"] . $imgData["img_name"]; 
-	//Delete the image
-	unlink($imgSource);
+	if(isset($imgData)){
+		$imgSource = "../". $imgData["img_dir"] . $imgData["img_name"]; 
+		//Delete the image
+		unlink($imgSource);
+	}
 
 
 

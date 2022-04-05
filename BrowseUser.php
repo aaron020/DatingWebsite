@@ -142,6 +142,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
               <form method="post" action="BrowseUser.php">
                 <div class="form-row pt-5">
                   <div class="offset-1 col-lg-10">
+                      <h3>Interested?</h3>
+                  </div>
+
+                  <div class="offset-1 col-lg-10">
                     <input type="submit" class = "submit" name="action" value="Yes">
                     <input type="submit" class = "submit" name="action" value="No">
                   </div>
