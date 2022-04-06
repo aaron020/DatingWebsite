@@ -16,7 +16,7 @@
 
     <div class="container ml-6">
       <h1 class="heading">Search Users</h1>
-      <form class="row g-3" action="preferences.php" name="setPreferences" method = "post"
+      <form class="row g-3" title = "You are not required to fill out every field" action="preferences.php" name="setPreferences" method = "post"
        onsubmit="return validateAge()">
         <script type="text/javascript" src="js/setPreferences.js"></script>
         <div class="mt-5 col-md-12">
@@ -74,13 +74,13 @@
           <small>Enter hobbies like : Running,Swimming,Climbing. Maximum of 3</small>
         </div>  
       <div class="mt-5 mb-5 col-md-12 text-center">
-        <button type="submit" class="submit-button">Search</button>
+        <button type="submit" class="submit-button" title="Searching will provided you with an array of users that match the criteria you have set">Search</button>
       </div> 
       </form>
     </div>
     <div class="container ml-6 mt-5 mb-5">
       <h1 class="heading">Advanced Search</h1>
-      <form class="row g-3" action="searchedUserProfile.php" method="post">
+      <form class="row g-3" title = "Both firstname and lastname are required" action="searchedUserProfile.php" method="post">
         <div class="mt-5 mb-5 col-md-6">
           <label for="firstname" name="firstname" class="form-label">Firstname</label>
           <input type="text" class="form-control" id="firstname" name= "firstname" maxlength="30" required>
@@ -91,7 +91,7 @@
           <input type="text" class="form-control" id="lastname" name= "lastname" maxlength="60" required>
         </div> 
           <div class="mt-5 mb-5 col-md-12 text-center">
-            <input type="submit" class = "submit" name="action" value="Find User">
+            <input type="submit" class = "submit" title = "You will find the user with the name provided" name="action" value="Find User">
           </div>                  
       </form>
     </div>

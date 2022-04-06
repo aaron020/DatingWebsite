@@ -33,7 +33,7 @@ include("connections.php");
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="UserProfile.php">My Profile</a>
   <a href="BrowseUser.php">Browse Users</a>
-  <a href="changePreferences.html">Edit Preferences</a>
+  <a href="changePreferences.html">Search</a>
   <a href="viewMatches.html">View Matches</a>
   <a href="EditUser.php">Edit Profile</a>
   <a href="favourites.php">Favourites</a>

@@ -222,6 +222,30 @@ function addLike($userId_LoggedIn, $userId_Received, $con){
 	if(!mysqli_query($con,$query)){
 		echo("Error description: " . mysqli_error($con));
 	}
+	checkForMatch($userId_LoggedIn,$userId_Received,$con);
+}
+
+//Check if this new like has created a match 
+function checkForMatch($userId_Sent, $userId_Received, $con){
+	$query = "SELECT * FROM likes WHERE userId_Sent = $userId_Received AND userId_Received = $userId_Sent";
+	$result = mysqli_query($con, $query);
+	if (mysqli_num_rows($result) > 0) {
+ 			addMatch($userId_Sent,$userId_Received,$con);
+ 	}else{
+ 		echo("error");
+ 	}
+}
+
+function addMatch($userId_first, $userId_second, $con){
+	//Create match for first user
+	$queryOne = "INSERT into matches (userId_Sent,userId_Received) values ($userId_first, $userId_second)";
+	if(!mysqli_query($con,$queryOne)){
+		echo("Error description: " . mysqli_error($con));
+	}
+	$queryTwo = "INSERT into matches (userId_Sent,userId_Received) values ($userId_second,$userId_first)";
+	if(!mysqli_query($con,$queryTwo)){
+		echo("Error description: " . mysqli_error($con));
+	}
 }
 
 
