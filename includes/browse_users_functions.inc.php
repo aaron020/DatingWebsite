@@ -276,3 +276,19 @@ function bestMatch($userId_LoggedIn, $con){
 
 }
 
+//Returns the users matches
+function userMatches($userId_LoggedIn,$con){
+	$query = "SELECT userId_Received from matches WHERE userId_Sent = $userId_LoggedIn";
+	$matches = [];
+	if($stmt = $con->prepare($query)){
+		$stmt->execute();
+		$stmt->bind_result($userId_Received);
+		while($stmt->fetch()){
+			array_push($matches, $userId_Received);
+		}
+		$stmt->close();
+	}
+	return $matches;
+
+}
+

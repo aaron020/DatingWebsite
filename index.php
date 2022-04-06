@@ -34,6 +34,7 @@ die();
 	<h3><a href="UserProfile.php">User Profile</a>
 	<h3><a href="favourites.php">Favs</a> 	
 	<h3><a href="bestMatch.php">Best Match</a></h3>	
+	<h3><a href="match.php">Match</a></h3>
 	 </h3>
 	
 

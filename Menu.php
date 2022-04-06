@@ -34,7 +34,7 @@ include("connections.php");
     <a href="UserProfile.php">My Profile</a>
   <a href="BrowseUser.php">Browse Users</a>
   <a href="changePreferences.html">Search</a>
-  <a href="viewMatches.html">View Matches</a>
+  <a href="match.php">View Matches</a>
   <a href="EditUser.php">Edit Profile</a>
   <a href="favourites.php">Favourites</a>
   <a href="bestMatch.php">Best Match</a>
