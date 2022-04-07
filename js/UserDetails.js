@@ -1,23 +1,21 @@
 var correct;
-function validateForm() {
+function validateInputFields() {
+  alert("Soemthing");
   correct = true;
   var firstname = document.forms["CreateUser"]["firstname"].value;
   var lastname = document.forms["CreateUser"]["lastname"].value;
-  var gender = document.forms["CreateUser"]["gender"].value;
   var city = document.forms["CreateUser"]["city"].value;
-  var img = document.forms["CreateUser"]["img"].value;
   var job = document.forms["CreateUser"]["job"].value;
   var hobbies = document.forms["CreateUser"]["hobbies"].value;
   var bio = document.forms["CreateUser"]["bio"].value;
   console.log(correct);
-  validateInput(firstname, "firstname");
+  validateField(firstname, "firstname");
   console.log(correct);
-  validateInput(lastname, "lastname");
-  validateInput(city, "city");
-  validateImg(img, "img");
-  validateInput(job,"job");
-  validateInput(hobbies,"hobbies");
-  validateInput(bio, "bio");
+  validateField(lastname, "lastname");
+  validateField(city, "city");
+  validateField(job,"job");
+  validateField(hobbies,"hobbies");
+  validateField(bio, "bio");
   console.log(correct);
 
   if(correct == false){
@@ -25,13 +23,13 @@ function validateForm() {
     return false;
   }else{
     alert("User Created!");
-    return true;
+    return false;
   }
 
 }
 
 
-function validateInput(input, inputName){
+function validateField(input, inputName){
   if(inputName == "bio" || inputName == "hobbies" || inputName = 'img'){
     if(input == null || input == ""){
       inputError(inputName);
@@ -60,6 +58,6 @@ function inputNormal(input){
   document.getElementById(input).style.boxShadow = "1px 1px 10px #323232";
 }
 //Input is empty or just space 
-function empty(input){
-  return input.trim().length === 0;
-}
+// function empty(input){
+//   return input.trim().length === 0;
+// }

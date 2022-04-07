@@ -3,6 +3,15 @@ body{
   background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,193,249,0.7175245098039216) 35%, rgba(244,156,255,1) 100%);
 }
 
+
+
+
+.file{
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 6px 12px;
+}
+
 *{
 	padding: 0;
 	margin: 0;

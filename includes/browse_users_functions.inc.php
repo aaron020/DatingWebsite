@@ -69,7 +69,7 @@ function groupHobbies($hobbies){
 
 	//Look phony hobby values 
 
-	foreach ($hobbiesArray as $key => $value) {
+	foreach ($hobbiesArray as $key => &$value) {
 		if(empty($value) || strlen($value) < 2 || strlen($value) > 20 || $key > 2){
 			//assume this is a phony value
 			unset($hobbiesArray[$key]);
@@ -103,7 +103,13 @@ function usersByPrefence($preferences, $userId_LoggedIn, $con){
 	//Get the hobbies entered + if there is less than 3 fill the others with %
 	$hobbies = groupHobbies($preferences['hobbies']);
 	for($i = count($hobbies); $i < 3; $i++){
-		array_push($hobbies,"%");
+		array_push($hobbies,"");
+	}
+
+	foreach ($hobbies as &$value) {
+		if($value != ""){
+			$value = "%" . $value . "%";
+		}
 	}
 		
 	//Executing the sql query 

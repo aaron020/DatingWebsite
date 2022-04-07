@@ -2,6 +2,12 @@
 session_start();
 include("includes/uniChecker.inc.php");
 include("connections.php");
+if(!isset($_SESSION['ID'])){
+	ob_start();
+	header('Location: Register.html');
+	ob_end_flush();
+	die();
+}
 $Imgdir = "img/pfp/";
 $fileName = rand(10,10000000) . basename($_FILES['img']['name']);
 $targetFile = $Imgdir . $fileName;
@@ -12,11 +18,6 @@ if ($_FILES['img']['size'] == 0 && $_FILES['fileToUpload']['error'] == 0){
 	exit();
 }
 
-
-if ($_FILES["img"]["size"] > 500000) {
-  	header("location: Userdetails.html?error=imageToLarge");
-	exit();;
-} 
 
 
 move_uploaded_file($_FILES['img']['tmp_name'], $targetFile);

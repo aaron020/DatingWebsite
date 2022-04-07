@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['ID'])){
+  ob_start();
+  header('Location: Login.php');
+  ob_end_flush();
+  die();
+}
 $_SESSION['userCount'] = 0;
 
 include("connections.php");
