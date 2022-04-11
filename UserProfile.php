@@ -41,8 +41,6 @@ if($imgData == null){
     <section class="User py-5">
       <div class="container">
         <div class="row">
-
-
           <div class="col-lg-5 pt-5 text-center">
             <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture">
             <h1><?php
@@ -59,6 +57,8 @@ if($imgData == null){
                     <p style="word-wrap:break-word"><?php echo $userDet["bio"]?></p>
                 </div>
               </div>
+             
+
 
 
 

@@ -5,7 +5,8 @@ include("uniChecker.inc.php");
 include("browse_users_functions.inc.php");
 include ("adminfunctions.inc.php");
 
-$userId_LoggedIn = 1;
+$userId_LoggedIn = $_SESSION['userId_Editing'];
+
 $userDet = getUserDetails($userId_LoggedIn, $con);
 $username = getUsername($userId_LoggedIn,$con);
 
@@ -76,10 +77,10 @@ if(!mysqli_query($con,$query)){
 	echo("Error description: " . mysqli_error($con));
 }
 
-// ob_start();
-// header('Location: ../Menu.php');
-// ob_end_flush();
-// die();
+ob_start();
+header('Location: ../admin_ViewUsers.php');
+ob_end_flush();
+die();
 // Just for testing -- 
 echo $username;
 echo $firstname;

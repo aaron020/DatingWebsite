@@ -6,9 +6,10 @@ include("connections.php");
 
 
 //The user that is logged in - Get their details
-$userId_LoggedIn = 1;
-$userDet = getUserDetails($userId_LoggedIn, $con);
-$username = getUsername($userId_LoggedIn, $con);
+$userId_editing = $_POST['userId'];
+$_SESSION['userId_Editing'] = $userId_editing;
+$userDet = getUserDetails($userId_editing, $con);
+$username = getUsername($userId_editing, $con);
 ?>
 
 
@@ -31,7 +32,7 @@ $username = getUsername($userId_LoggedIn, $con);
       <h1 class="heading">Edit User - <?php echo $username["username"]?></h1>
       <form class="row g-3" action="includes/admin_editUser.inc.php"  method = "post" enctype="multipart/form-data">
         <div class="mt-5 col-md-12">
-          <a href="Menu.php">Return</a>
+          <a href="admin_ViewUsers.php">Return</a>
         </div>
 
         <div class="mt-5 col-md-6">
@@ -124,7 +125,7 @@ $username = getUsername($userId_LoggedIn, $con);
     <div class="container ml-6 mt-5 mb-5">
       <h1 class="heading">Ban User</h1>
        <form class="row g-3" action="#"  method = "post">
-        <?php $banned = bannedText($userId_LoggedIn,$con) ?>
+        <?php $banned = bannedText($userId_editing,$con) ?>
         <div style="color: <?php if($banned == "UnBanned"){echo "#00ff00";} 
         else if($banned == "Temporarily Banned"){echo "orange";}else{echo "red";}?>;" class="mt-5 col-md-12">
           <p>User Ban Status: <?php echo $banned ?></p>
