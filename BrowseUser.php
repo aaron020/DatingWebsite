@@ -100,7 +100,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <div class="row">
 
 
-          <div class="col-lg-5 pt-5 text-center">
+          <div class="col-lg-6 pt-5 text-center">
             <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture" onerror=this.src="img/default/default.png">
             <h1><?php
             echo textStyle($userDet["firstname"]);?></h1>
@@ -109,10 +109,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
           </div>
 
 
-          <div class="col-lg-7 text-center py-3">
+          <div class="col-lg-6 text-center py-3">
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <label class="label">Bio:</label>
                     <p style="word-wrap:break-word"><?php echo $userDet["bio"]?></p>
                 </div>
               </div>
@@ -120,7 +121,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <label class="label">My Hobbies Are:</label>
                   <h4>
                     <?php 
                     $arrayHobbies = groupHobbies($userDet["hobbies"]);
@@ -135,24 +137,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
               <div class="py-3">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <label class="label">Studying at:</label>
                   <p><?php echo textStyle($userDet["university"])?></p>
                 </div>
               </div>   
               <form method="post" action="BrowseUser.php">
                 <div class="form-row pt-5">
-                  <div class="offset-1 col-lg-10">
-                      <h3>Interested?</h3>
+                  <div class="col-lg-10">
+                      <h3>Interested in this user?</h3>
                   </div>
 
-                  <div class="offset-1 col-lg-10">
-                    <input type="submit" class = "submit" name="action" value="Yes">
-                    <input type="submit" class = "submit" name="action" value="No">
+                  <div class="col-lg-10">
+                    <input type="submit" class = "submitYes" name="action" value="Yes" title="This user will be added to favourites">
+                    <input type="submit" class = "submitNo" name="action" value="No" title="You wont see this user again">
                   </div>
                 </div>
               </form>
               <div class="form-row pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
                   <a href="Menu.php">
                     Menu
                   </a>

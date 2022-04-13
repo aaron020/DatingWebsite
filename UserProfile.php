@@ -41,7 +41,7 @@ if($imgData == null){
     <section class="User py-5">
       <div class="container">
         <div class="row">
-          <div class="col-lg-5 pt-5 text-center">
+          <div class="col-lg-6 pt-5 text-center">
             <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture">
             <h1><?php
             echo textStyle($userDet["firstname"]);?></h1>
@@ -50,10 +50,11 @@ if($imgData == null){
           </div>
 
 
-          <div class="col-lg-7 text-center py-3">
+          <div class="col-lg-6 text-center py-3">
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <small class="label">Bio:</small>
                     <p style="word-wrap:break-word"><?php echo $userDet["bio"]?></p>
                 </div>
               </div>
@@ -63,7 +64,8 @@ if($imgData == null){
 
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <small class="label">Hobbies:</small>
                   <h4>
                     <?php 
                     $arrayHobbies = groupHobbies($userDet["hobbies"]);
@@ -78,19 +80,20 @@ if($imgData == null){
 
 
               <div class="py-3">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <small class="label">Studying at:</small>
                   <p><?php echo textStyle($userDet["university"])?></p>
                 </div>
               </div>   
               <form action="EditUser.php">
                 <div class="form-row pt-5">
-                  <div class="offset-1 col-lg-10">
+                  <div class="col-lg-10">
                     <button type="submit" name="submit" class="submit">Edit Profile</button>
                   </div>
                 </div>
               </form>
               <div class="form-row pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
                   <a href="Menu.php">
                     Menu
                   </a>

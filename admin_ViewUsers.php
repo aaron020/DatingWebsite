@@ -67,7 +67,7 @@ $userids = getAllUserIds($con);
           <div class='row'>
 
 
-            <div class='col-lg-5 pt-5 text-center'>
+            <div class='col-lg-6 pt-5 text-center'>
               <img src='{$imgSource}' class='img-fluid' alt='User Profile Picture'>
               <h1>{$userDet["firstname"]}</h1>
               <h2>{$userDet["city"]}</h2>
@@ -75,7 +75,7 @@ $userids = getAllUserIds($con);
               <p>{$userDet["job"]}</p>
             </div>
 
-            <div class='col-lg-7 text-center py-3'>
+            <div class='col-lg-6 text-center py-3'>
               <div class='py-3 pt-5'>
                 <div class='offset-1 col-lg-10'>
                   <p style='word-wrap:break-word'>{$userDet["bio"]}</p>

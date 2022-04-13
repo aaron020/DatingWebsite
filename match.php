@@ -23,7 +23,7 @@ $maxUsers = count($matches); // Amount of users found based off the preferences 
 
 if($maxUsers == 0){
   ob_start();
-  header('Location: noUsers.html');
+  header('Location: Error/noMatches.html');
   ob_end_flush();
   die();
 }

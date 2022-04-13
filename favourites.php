@@ -23,7 +23,7 @@ $maxUsers = count($liked); // Amount of users found based off the preferences gi
 
 if($maxUsers == 0){
   ob_start();
-  header('Location: noUsers.html');
+  header('Location: Error/noFavs.html');
   ob_end_flush();
   die();
 }
@@ -67,7 +67,7 @@ if($imgData == null){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style/user_style.css">
 
-  <title>User</title>
+  <title>Favourites</title>
   </head>
   <body>
     <section class="User py-5">
@@ -75,7 +75,7 @@ if($imgData == null){
         <div class="row">
 
 
-          <div class="col-lg-5 pt-5 text-center">
+          <div class="col-lg-6 pt-5 text-center">
             <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture"
             onerror=this.src="img/default/default.png">
             <h1><?php
@@ -85,10 +85,11 @@ if($imgData == null){
           </div>
 
 
-          <div class="col-lg-7 text-center py-3">
+          <div class="col-lg-6 text-center py-3">
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <label class="label">Bio:</label>
                     <p style="word-wrap:break-word"><?php echo $userDet["bio"]?></p>
                 </div>
               </div>
@@ -96,7 +97,8 @@ if($imgData == null){
 
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <label class="label">Hobbies:</label>
                   <h4>
                     <?php 
                     $arrayHobbies = groupHobbies($userDet["hobbies"]);
@@ -111,19 +113,20 @@ if($imgData == null){
 
 
               <div class="py-3">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <label class="label">Studying at</label>
                   <p><?php echo textStyle($userDet["university"])?></p>
                 </div>
               </div>   
               <form method="post" action="favourites.php">
                 <div class="form-row pt-5">
-                  <div class="offset-1 col-lg-10">
+                  <div class="col-lg-10">
                     <input type="submit" name="action" class="submit" value="Next">
                   </div>
                 </div>
               </form>
               <div class="form-row pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
                   <a href="Menu.php">
                     Menu
                   </a>

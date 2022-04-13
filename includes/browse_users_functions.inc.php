@@ -102,9 +102,20 @@ function usersByPrefence($preferences, $userId_LoggedIn, $con){
 
 	//Get the hobbies entered + if there is less than 3 fill the others with %
 	$hobbies = groupHobbies($preferences['hobbies']);
-	for($i = count($hobbies); $i < 3; $i++){
-		array_push($hobbies,"");
+	if(empty($hobbies)){
+		//No hobbies entered
+		for($i = count($hobbies); $i < 3; $i++){
+			array_push($hobbies,"%");
+		}
+	}else{
+		//Atleast one hobby entered
+		for($i = count($hobbies); $i < 3; $i++){
+			array_push($hobbies,"");
+		}
 	}
+
+
+
 
 	foreach ($hobbies as &$value) {
 		if($value != ""){
@@ -118,6 +129,7 @@ function usersByPrefence($preferences, $userId_LoggedIn, $con){
 	university LIKE '{$preferences['university']}' &&
 	city LIKE '{$preferences['city']}' &&
 	(age <= {$preferences['age_high']} && age >= {$preferences['age_low']});";
+	
 
 	$userIdArray = []; 
 	if ($stmt = $con->prepare($query)) {

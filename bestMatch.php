@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   $_SESSION['BestuserCount'] = $_SESSION['BestuserCount'] + 1;
 
   if($_SESSION['BestuserCount'] >= $_SESSION['maxUsers']){
-    header('Location: noUsers.html');
+    header('Location: Error/noBestMatch.html');
     exit();
   }
 
@@ -98,19 +98,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         <div class="row">
 
 
-          <div class="col-lg-5 pt-5 text-center">
+          <div class="col-lg-6 pt-5 text-center">
             <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture" onerror=this.src="img/default/default.png">
             <h1><?php
             echo textStyle($userDet["firstname"]);?></h1>
+            <label class="label">You are both from </label>
             <h2><?php echo textStyle($userDet["city"]) . " , " . $userDet["age"];?></h2>
             <p><?php echo textStyle($userDet["job"])?></p>
           </div>
 
 
-          <div class="col-lg-7 text-center py-3">
+          <div class="col-lg-6 text-center py-3">
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
                     <p style="word-wrap:break-word"><?php echo $userDet["bio"]?></p>
                 </div>
               </div>
@@ -118,7 +119,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
               <div class="py-3 pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
                   <h4>
                     <?php 
                     $arrayHobbies = groupHobbies($userDet["hobbies"]);
@@ -133,20 +134,21 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
 
               <div class="py-3">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
+                  <small class="label">You both study at</small>
                   <p><?php echo textStyle($userDet["university"])?></p>
                 </div>
               </div>   
               <form method="post" action="BrowseUser.php">
                 <div class="form-row pt-5">
-                  <div class="offset-1 col-lg-10">
-                    <input type="submit" class = "submit" name="action" value="Yes">
-                    <input type="submit" class = "submit" name="action" value="No">
+                  <div class="col-lg-10">
+                    <input type="submit" class = "submitYes" name="action" value="Yes">
+                    <input type="submit" class = "submitNo" name="action" value="No">
                   </div>
                 </div>
               </form>
               <div class="form-row pt-5">
-                <div class="offset-1 col-lg-10">
+                <div class="col-lg-10">
                   <a href="Menu.php">
                     Menu
                   </a>
