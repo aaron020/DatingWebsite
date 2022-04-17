@@ -43,7 +43,7 @@ $userids = getAllUserIds($con);
   <body>
 
       <h1 class="pt-3 text-center">
-        <a href="Menu.php">
+        <a href="admin_Menu.php">
           Admin Menu
         </a>
       </h1>
@@ -62,7 +62,7 @@ $userids = getAllUserIds($con);
           $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
         }
         echo "
-      <section class='User py-5'>
+      <section class='User py-5' id= 'User{$userDet["userId"]}'>
         <div class='container'>
           <div class='row'>
 

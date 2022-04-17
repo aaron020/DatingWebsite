@@ -29,13 +29,13 @@
 
         <div class="mt-5 col-md-6">
           <label for="firstname" class="form-label">Firstname</label>
-          <input type="text" name= "firstname" class="form-control" pattern="[a-zA-Z]++" title="No numbers or symbols allowed" id="firstname" maxlength="20" required>
+          <input type="text" name= "firstname" class="form-control" pattern="[A-zÀ-ž\s]++" title="No numbers or symbols allowed" id="firstname" maxlength="20" required>
         </div>
 
 
         <div class="mt-5 col-md-6">
           <label for="lastname" class="form-label">Lastname</label>
-          <input type="text" name="lastname" class="form-control" pattern="[a-zA-Z]+"  title="No numbers or symbols allowed" id="lastname" maxlength="20" required>
+          <input type="text" name="lastname" class="form-control" pattern="[A-zÀ-ž\s]+"  title="No numbers or symbols allowed" id="lastname" maxlength="20" required>
         </div>
 
         <div class="mt-5 col-md-12">
@@ -43,6 +43,7 @@
           <select class="form-control" id="gender" name="gender">
             <option>Male</option>
             <option>Female</option>
+            <option>Other</option>
           </select>
         </div>
 
@@ -62,22 +63,40 @@
 
         <div class="mt-5 col-md-6">
           <label for="city" name="city" class="form-label">City</label>
-          <input type="text" class="form-control" id="city" pattern="[a-zA-Z]+"  title="No numbers or symbols allowed" name= "city" maxlength="60" required>
+          <input type="text" class="form-control" id="city" pattern="[A-zÀ-ž\s]+"  title="No numbers or symbols allowed" name= "city" maxlength="60" required list="cities">
+          <datalist id="cities">
+            <option>Limerick</option>
+            <option>Cork</option>
+            <option>Dublin</option>
+            <option>Belfast</option>
+            <option>London</option>
+            <option>New York</option>
+            <option>Tokyo</option>
+          </datalist>
         </div>      
 
         <div class="mt-5 col-md-6">
           <label for="uni" name="uni" class="form-label">University</label>
-          <input type="text" class="form-control" id="uni" pattern="[a-zA-Z]+"  title="No numbers or symbols allowed" name= "uni" maxlength="60">
+          <input type="text" class="form-control" id="uni" pattern="[A-zÀ-ž\s]+"  title="No numbers or symbols allowed" name= "uni" maxlength="60" list="universities" >
+          <datalist id="universities">
+            <option>University Of Limerick</option>
+            <option>NUI Galway</option>
+            <option>University College Dublin</option>
+            <option>Trinity College</option>
+            <option>Dublin City College</option>
+            <option>Maynooth University</option>
+            <option>University College Dublin</option>
+          </datalist>
         </div>
 
         <div class="mt-5 col-md-12">
-          <label for="bio" name="uni" class="form-label">Bio</label>
+          <label for="bio" name="bio" class="form-label">Bio</label>
           <textarea type="text" class="form-control" id="bio" name= "bio" maxlength="250" required></textarea>
         </div>
 
         <div class="mt-5 col-md-12">
           <label for="job" name="job" class="form-label">Job</label>
-          <input type="text" class="form-control" id="job" pattern="[a-zA-Z]+"  title="No numbers or symbols allowed" name= "job" maxlength="60" required>
+          <input type="text" class="form-control" id="job" pattern="[A-zÀ-ž\s]+"  title="No numbers or symbols allowed" name= "job" maxlength="60" required>
           <small>If you are currently in University, enter Job as Student</small>
         </div>                      
 

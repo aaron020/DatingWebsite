@@ -97,6 +97,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   <body>
     <section class="User py-5">
       <div class="container">
+
         <div class="row">
 
 
@@ -158,6 +159,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <div class="col-lg-10">
                   <a href="Menu.php">
                     Menu
+                  </a>
+                </div>
+                <div class="col-lg-10">
+                  <a href="Help/browseHelp.html">
+                    Info
                   </a>
                 </div>
               </div>

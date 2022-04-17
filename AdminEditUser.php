@@ -32,7 +32,7 @@ $username = getUsername($userId_editing, $con);
       <h1 class="heading">Edit User - <?php echo $username["username"]?></h1>
       <form class="row g-3" action="includes/admin_editUser.inc.php"  method = "post" enctype="multipart/form-data">
         <div class="mt-5 col-md-12">
-          <a href="admin_ViewUsers.php">Return</a>
+          <a href="admin_ViewUsers.php#User<?php echo $userId_editing; ?>">Return</a>
         </div>
 
         <div class="mt-5 col-md-6">
