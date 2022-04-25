@@ -1,147 +1,196 @@
 <?php
 session_start();
-if(!isset($_SESSION['ID'])){
-  ob_start();
-  header('Location: Login.php');
-  ob_end_flush();
-  die();
-}
-$_SESSION['userCount'] = 0;
-$_SESSION['BestuserCount'] = 0;
-
+include("includes/browse_users_functions.inc.php");
 include("connections.php");
-?>
 
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="MainMenuStyle.css">
-<link rel="icon" type="image/x-icon" href="images/website/icon.png">
-<title>Menu</title>
-</head>
-<body>
-
-<!--
-<div class="banner">
-  <img class="banner-image" src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\banner.jpg">
-<div class="banner--fadeBottom"></div>
-</div>  -->
-
-<div class="banner">
-  <div class="banner__contents">
-    <h1 class="banner__title">Love Connect</h1>
-  </div>
-  <div class="banner--fadeBottom"></div>
-</div>
-
-
-<div id="mySidenav" class="sidenav">
-<input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..." title="Search a user">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="UserProfile.php">My Profile</a>
-  <a href="BrowseUser.php">Browse Users</a>
-  <a href="changePreferences.html">Search</a>
-  <a href="match.php">View Matches</a>
-  <a href="EditUser.php">Edit Profile</a>
-  <a href="favourites.php">Favourites</a>
-  <a href="bestMatch.php">Best Match</a>
-  <a href="includes/logout.inc.php">Log Out</a>
-</div>
-
-<div id="main">
-  <span style="font-size:30px;cursor:pointer; color: white" onclick="openNav()">&#9776; Menu</span>
-</div>
-	
-
-	<form id="form"> 
-  <input type="search" id="search-box" placeholder="Search...">
-  <button>Search</button>
-</form>
-
-    <!--Browse Users-->
-<div class="row">
-    <h2>BROWSE USERS</h2>
-    <div class="row_posters">
-<?php 
-
-$sql = "SELECT img_name FROM images";
-$result = mysqli_query($con,$sql); //potential error
-if(mysqli_num_rows($result)> 0){
-    while($fetch = mysqli_fetch_assoc($result)){
-        $image = $image + 1;
-    ?>
-
-<!--<div class="nameDiv"> -->
-    <?php $finalImg = "./img/pfp/" . $fetch["img_name"]; ?>
-
-<img src="<?php echo $finalImg; ?>" alt="" class="row_poster row_posterLarge">
-
-<!--<h6>Dean</h6>-->
-    <?php
-  // echo "Dean";
-
-    
-    $finalImg = "./img/pfp/" . $fetch["img_name"];
-
-    ?>
-<!--</div> -->
-    <?php
+//The user that is logged in  11 to see all users
+$userId_LoggedIn = $_SESSION['ID'];
+$userDet;
+$imgData;
+$imgSource;
+$targetId = $_SERVER['targetId'];
+//The Yes or No Button are clicked
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  if($targetId != null && in_array($targetId, $_SESSION['userIds'])){
+       if($_POST['action'] == 'Yes'){
+        addLike($userId_LoggedIn, $targetId, $con);
     }
+    if($_POST['action'] == 'No'){
+        addNotInterested($userId_LoggedIn, $targetId, $con);
+    }
+  }
+  else{
+    if($_POST['action'] == 'Yes'){
+        addLike($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['userCount']], $con);
+    }
+    if($_POST['action'] == 'No'){
+        addNotInterested($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['userCount']], $con);
+    }
+  }
+  $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
+
+  if($_SESSION['userCount'] >= $_SESSION['maxUsers']){
+    header('Location: noUsers.html');
+    exit();
+  }
+
+
+  $userDet = getUserDetails($_SESSION['userIds'][$_SESSION['userCount']], $con);
+  $imgData = getImg($_SESSION['userIds'][$_SESSION['userCount']], $con);
+  if($imgData == null){
+  $imgSource = "img/default/" . "default.png"; 
+  }else{
+    $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+  }
+
+
+
+}else{
+  //The page is loaded for the first time
+
+  //An array of the user preferences
+  $pref = getPreferences($userId_LoggedIn, $con);
+  //All the Id's of users that the user logged in should be interested in
+  $ids = usersByPrefence($pref, $userId_LoggedIn,$con);
+
+  if(isset($_SESSION['userIds'])){
+    //Session var ia already set - remove all vals + give it new ones
+    unset($_SESSION['userIds']);
+    $_SESSION['userIds'] = $ids;
+  }else{
+    //Session var is not set - so we set it
+    $_SESSION['userIds'] = $ids;
+  }
+
+  $_SESSION['maxUsers'] = count($_SESSION['userIds']);
+  
+  if($_SESSION['userCount'] >= $_SESSION['maxUsers']){
+    header('Location: noUsers.html');
+    exit();
+  }
+
+  if(empty($_SESSION['userCount'])){
+    $_SESSION['userCount'] = 0;
+  }  
+  $targetId = $_SERVER['QUERY_STRING'];
+   if($targetId != null && in_array($targetId, $_SESSION['userIds'])){
+       $userDet = getUserDetails($targetId, $con);
+       $imgData = getImg($targetId, $con);
+   }
+   else{
+    $userDet = getUserDetails($_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
+    $imgData = getImg($_SESSION['userIds'][$_SESSION['BestuserCount']], $con);
+  }
+
+  if($imgData == null){
+    $imgSource = "img/default/" . "default.png"; 
+  }else{
+    $imgSource = $imgData["img_dir"] . $imgData["img_name"]; 
+  }
 }
+
+
 ?>
-    </div>
-</div>
-	
-	 <!--View Matches-->
-    <div class="row">
-      <h2>VIEW MATCHES</h2>
-      <div class="row_posters">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl5.jpg" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\boy6.jpg" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl.webp" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\boy3.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\boy4.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl3.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl4.jpg" alt="" class="row_poster row_posterLarge">			
-	  	<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl6.jpg" alt="" class="row_poster row_posterLarge">
-	</div>
-    </div>
 
-    <!--Your Top 5 Matches!-->
-    <div class="row">
-      <h2>TOP 5 MATCHES</h2>
-      <div class="row_posters">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl5.jpg" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl.webp" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl3.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl4.jpg" alt="" class="row_poster row_posterLarge">			
-	  	<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl6.jpg" alt="" class="row_poster row_posterLarge">
 
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style/user_style.css">
+
+  <title>Browse Users</title>
+  </head>
+  <body>
+    <section class="User py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 pt-5 text-center">
+            <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture" onerror=this.src="img/default/default.png">
+            <h1><?php
+            echo textStyle($userDet["firstname"]);?></h1>
+            <h2><?php echo textStyle($userDet["city"]) . " , " . $userDet["age"];?></h2>
+            <p><?php echo textStyle($userDet["job"])?></p>
+          </div>
+
+
+          <div class="col-lg-6 text-center py-3">
+
+              <div class="py-3 pt-5">
+                <div class="col-lg-10">
+                  <label class="label">Bio:</label>
+                    <p style="word-wrap:break-word"><?php echo $userDet["bio"]?></p>
+                </div>
+              </div>
+
+
+
+              <div class="py-3 pt-5">
+                <div class="col-lg-10">
+                  <label class="label">My Hobbies Are:</label>
+                  <h4>
+                    <?php 
+                    $arrayHobbies = groupHobbies($userDet["hobbies"]);
+                    foreach ($arrayHobbies as $value) {
+                      echo textStyle($value) . "    ";
+                   } 
+
+                   ?>
+                  </h4>
+                </div>
+              </div>
+
+
+              <div class="py-3">
+                <div class="col-lg-10">
+                  <label class="label">Studying at:</label>
+                  <p><?php echo textStyle($userDet["university"])?></p>
+                </div>
+              </div>   
+              <form method="post" action="BrowseUser.php">
+                <div class="form-row pt-5">
+                  <div class="col-lg-10">
+                      <h3>Interested in this user?</h3>
+                  </div>
+
+                  <div class="col-lg-10">
+                    <input type="submit" class = "submitYes" name="action" value="Yes" title="This user will be added to favourites">
+                    <input type="submit" class = "submitNo" name="action" value="No" title="You wont see this user again">
+                  </div>
+                </div>
+              </form>
+              <div class="form-row pt-5">
+                <div class="col-lg-10">
+                  <a href="Menu.php">
+                    Menu
+                  </a>
+                </div>
+                <div class="col-lg-10">
+                  <a href="Help/browseHelp.html">
+                    Info
+                  </a>
+                </div>
+              </div>
+            </form>
+            
+          </div>
+
+
+          </div>
+        </div>
       </div>
-    </div>
-
-<script>
-function openNav() {
-  document.getElementById("mySidenav").style.width = "250px";
-  document.getElementById("main").style.marginLeft = "250px";
-  document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
-}
-
-function closeNav() {
-  document.getElementById("mySidenav").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
-  document.body.style.backgroundColor = "white";
-}
-
-function viewMatches(){
+    </section>
 
 
-}
 
-
-</script>
-   
-</body>
-</html> 
+  </body>
+</html>
