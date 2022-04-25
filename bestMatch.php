@@ -42,6 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
   //All the Id's of users that the user logged in should be interested in
   $ids = bestMatch($userId_LoggedIn, $con);
+  print_r($ids);
 
   if(isset($_SESSION['userIds'])){
     //Session var ia already set - remove all vals + give it new ones
@@ -57,7 +58,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $_SESSION['BestuserCount'] = 0;
   }
   if($_SESSION['BestuserCount'] >= $_SESSION['maxUsers']){
-    header('Location: noUsers.html');
+    header('Location: Error/noBestMatch.html');
     exit();
   }
 
@@ -89,8 +90,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style/user_style.css">
-
-  <title>Browse Users</title>
+    <link rel="icon" type="image/x-icon" href="images/website/icon.png">
+  <title>Best Match</title>
   </head>
   <body>
     <section class="User py-5">
@@ -139,7 +140,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                   <p><?php echo textStyle($userDet["university"])?></p>
                 </div>
               </div>   
-              <form method="post" action="BrowseUser.php">
+              <form method="post" action="bestMatch.php">
                 <div class="form-row pt-5">
                   <div class="col-lg-10">
                     <input type="submit" class = "submitYes" name="action" value="Yes">

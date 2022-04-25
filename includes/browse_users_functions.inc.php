@@ -27,7 +27,7 @@ function getPreferences($userId, $con){
 
 
 		}else{
-			echo "error";
+			echo "preferences - error";
 			//ERROR
 		}
 	}
@@ -50,7 +50,7 @@ function getUserDetails($userId, $con){
 	if (mysqli_num_rows($result) > 0) {
  			return mysqli_fetch_assoc($result);
  	}else{
- 		echo("error");
+ 		echo("userdetails - error");
  	}
 }
 
@@ -250,7 +250,7 @@ function checkForMatch($userId_Sent, $userId_Received, $con){
 	if (mysqli_num_rows($result) > 0) {
  			addMatch($userId_Sent,$userId_Received,$con);
  	}else{
- 		echo("error");
+ 		//not found
  	}
 }
 
@@ -290,8 +290,27 @@ function bestMatch($userId_LoggedIn, $con){
 		}
 		$stmt->close();
 	}
-	return $bestMatch;
+	
+			//Remove the user that is logged in from the list
+	removeId($userId_LoggedIn, $bestMatch);
 
+	//Remove all banned users, liked users, not interested users
+	$bannedUsers = bannedUsers($con);
+	$likedUsers = likedUsers($userId_LoggedIn, $con);
+	$notInterestedUsers = notInterestedUsers($userId_LoggedIn, $con);
+
+	if($bannedUsers){
+		removeIdArray($bannedUsers, $bestMatch);
+	}
+	if($likedUsers){
+		removeIdArray($likedUsers, $bestMatch);
+	}
+	
+
+	if($notInterestedUsers){
+		removeIdArray($notInterestedUsers, $bestMatch);
+	}
+	return array_values($bestMatch);
 }
 
 //Returns the users matches

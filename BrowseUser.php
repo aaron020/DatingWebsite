@@ -15,11 +15,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
   if($_POST['action'] == 'Yes'){
     addLike($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['userCount']], $con);
+    $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
   }
   if($_POST['action'] == 'No'){
     addNotInterested($userId_LoggedIn, $_SESSION['userIds'][$_SESSION['userCount']], $con);
+    $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
   }
-  $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
+  if($_POST['action'] == 'Next User'){
+    $_SESSION['userCount'] = $_SESSION['userCount'] + 1;
+  }
+  if($_POST['action'] == 'Previous User'){
+    if($_SESSION['userCount'] != 0){
+      $_SESSION['userCount'] = $_SESSION['userCount'] - 1;
+    }
+    
+  }
+  
 
   if($_SESSION['userCount'] >= $_SESSION['maxUsers']){
     header('Location: noUsers.html');
@@ -91,16 +102,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style/user_style.css">
-
+    <link rel="icon" type="image/x-icon" href="images/website/icon.png">
   <title>Browse Users</title>
   </head>
   <body>
+    <div class="container ml-6 mt-5">
+      <form class="row g-3"  action="BrowseUser.php" method="post">
+        <div class="mt-2 mb-2 col-md-6 text-center">
+          <input type="submit" class = "submit" name="action" value="Previous User" title="Move to previous user">
+        </div>      
+
+        <div class="mt-2 mb-2 col-md-6 text-center">
+          <input type="submit" class = "submit" name="action" value="Next User" title="Move to next user">
+          
+        </div>                
+      </form>
+    </div>
+
     <section class="User py-5">
-      <div class="container">
-
+      <div class="container">          
         <div class="row">
-
-
           <div class="col-lg-6 pt-5 text-center">
             <img src="<?php echo $imgSource?>" class="img-fluid" alt="User Profile Picture" onerror=this.src="img/default/default.png">
             <h1><?php

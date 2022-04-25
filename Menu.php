@@ -7,6 +7,7 @@ if(!isset($_SESSION['ID'])){
   die();
 }
 $_SESSION['userCount'] = 0;
+$_SESSION['BestuserCount'] = 0;
 
 include("connections.php");
 ?>
@@ -17,6 +18,8 @@ include("connections.php");
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="MainMenuStyle.css">
+<link rel="icon" type="image/x-icon" href="images/website/icon.png">
+<title>Menu</title>
 </head>
 <body>
 

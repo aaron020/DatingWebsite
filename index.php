@@ -18,35 +18,6 @@ unset($_SESSION['admin_user']);
 
 
 ?>
-<!-- <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-</head>
-<body>
-	<h3><a href="Login.php">Login</a> </h3>
-	<h3><a href="Register.html">Register</a> </h3>
-	<h3><a href="Userdetails.html">Userdetails</a> </h3>
-	<h3><a href="Menu.html">Menu</a> </h3>
-	<h3><a href="changePreferences.html">Change Preferences</a> </h3>
-	<h3><a href="BrowseUser.php">Browse User</a> </h3>
-	<h3><a href="AdminMenu.html">Admin Menu</a> </h3>
-	<h3><a href="noUsers.html">No Users</a> </h3>
-	<h3><a href="error.html">Error</a> </h3>
-	<h3><a href="EditUser.php">Edit User</h3>
-	<h3><a href="AdminEditUser.php">Admin Edit User</h3>	
-	<h3><a href="test.php">Test</a> </h3>
-	<h3><a href="UserProfile.php">User Profile</a>
-	<h3><a href="favourites.php">Favs</a> 	
-	<h3><a href="bestMatch.php">Best Match</a></h3>	
-	<h3><a href="match.php">Match</a></h3>
-	 </h3>
-	
-
-</body>
-</html> -->
 
 
 <!DOCTYPE html>
@@ -60,6 +31,7 @@ unset($_SESSION['admin_user']);
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
    <link rel="icon" type="image/x-icon" href="images/website/icon.png">
   <link rel="stylesheet" type="text/css" href="style/index.css">
+  <title>Love Connect</title>
   </head>
   <body>
     <div class="container-fluid banner">
@@ -84,8 +56,6 @@ unset($_SESSION['admin_user']);
     				<input type="submit" class="submit" value="Get Connected!" name="Get Connected">
     			</form>
     		</div>
-    	</div>
-
     </div>
 
   </body>
