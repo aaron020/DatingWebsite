@@ -4,7 +4,10 @@ include("includes/browse_users_functions.inc.php");
 include("includes/adminfunctions.inc.php");
 include("connections.php");
 
-
+if(!isset($_SESSION['admin_user'])){
+  header("location: index.php");
+}
+unset($_SESSION['userId_Editing']);
 //The user that is logged in  11 to see all users
 $userId_LoggedIn = 1;
 // $userId_LoggedIn = 1;

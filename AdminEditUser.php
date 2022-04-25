@@ -5,9 +5,20 @@ include("includes/adminfunctions.inc.php");
 include("connections.php");
 
 
+if(!isset($_SESSION['admin_user'])){
+  header("location: index.php");
+}
+
+
 //The user that is logged in - Get their details
-$userId_editing = $_POST['userId'];
-$_SESSION['userId_Editing'] = $userId_editing;
+
+if(!isset($_SESSION['userId_Editing'])){
+  $userId_editing = $_POST['userId'];
+  $_SESSION['userId_Editing'] = $userId_editing;
+}else{
+  $userId_editing = $_SESSION['userId_Editing'];
+}
+
 $userDet = getUserDetails($userId_editing, $con);
 $username = getUsername($userId_editing, $con);
 ?>
@@ -124,7 +135,7 @@ $username = getUsername($userId_editing, $con);
 
     <div class="container ml-6 mt-5 mb-5">
       <h1 class="heading">Ban User</h1>
-       <form class="row g-3" action="#"  method = "post">
+       <form class="row g-3" action="Admin_BanUser.php"  method = "post">
         <?php $banned = bannedText($userId_editing,$con) ?>
         <div style="color: <?php if($banned == "UnBanned"){echo "#00ff00";} 
         else if($banned == "Temporarily Banned"){echo "orange";}else{echo "red";}?>;" class="mt-5 col-md-12">
@@ -132,8 +143,8 @@ $username = getUsername($userId_editing, $con);
         </div>
 
         <div class="mt-5 col-md-12">
-          <label for="gender">Time Period</label>
-          <select class="form-control" id="gender" name="gender">
+          <label for="banTime">Time Period</label>
+          <select class="form-control" id="banTime" name="banTime">
             <option>1 Day</option>
             <option>3 Days</option>
             <option>1 Week</option>

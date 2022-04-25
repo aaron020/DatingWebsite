@@ -14,6 +14,8 @@ if(isset($_COOKIE["Logged_In"])){
   exit();
 }
 
+unset($_SESSION['admin_user']);
+
 
 ?>
 <!-- <!DOCTYPE html>
@@ -56,6 +58,7 @@ if(isset($_COOKIE["Logged_In"])){
 
     <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="icon" type="image/x-icon" href="images/website/icon.png">
   <link rel="stylesheet" type="text/css" href="style/index.css">
   </head>
   <body>
@@ -64,7 +67,7 @@ if(isset($_COOKIE["Logged_In"])){
     		<div class="col-md-12">
     			<nav class="navbar">
     			<div class="navbar-brand">
-    				<img src="https://via.placeholder.com/70" alt="Logo">
+    				<img src="images/website/icon.png" alt="Logo" width="70" height="70">
     				Love Connect
     			</div>
     			<ul class="nav">

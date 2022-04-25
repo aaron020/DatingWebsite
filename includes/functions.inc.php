@@ -169,25 +169,77 @@ function loginUser($conn, $name, $pwd){
 	$checkPwd = password_verify($pwd,$pwdHashed["password"]);
 	
 	if ($checkPwd == false) {
-		header("location: ../Login.php?error-wrongpassword");
+		header("location: ../Login.php?error=wrongpassword");
 		exit();
 	}
 
 	else if ($checkPwd == true) {
 		session_start();
 		$UID = UidGet($conn, $name);
-		$_SESSION['ID'] = $UID['userId'];
-		$cookie_name = "Logged_In";
-		$cookie_value = $UID['userId'];
-		setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
-		//Check to see if user details have been filled out already
-		if(userDetailsEntered($conn,$_SESSION['ID'])){
-			header("location: ../Menu.php");
+		if (isAdmin($conn, $UID['userId'])) {
+			header("location: ../admin_Menu.php");
+			//admin user is logged in, just set the session variable 
+			$_SESSION['admin_user'] = 1;
 			exit();
 		}else{
-			header("location: ../Userdetails.html"/* .$_SESSION['ID'] */);
-			exit();
+			if (isbanned($conn, $UID['userId'])) {
+				header("location: ../Login.php?error=banned");
+				exit();
+			}
+			$_SESSION['ID'] = $UID['userId'];
+			$cookie_name = "Logged_In";
+			$cookie_value = $UID['userId'];
+			setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
+			//Check to see if user details have been filled out already
+			if(userDetailsEntered($conn,$_SESSION['ID'])){
+				header("location: ../Menu.php");
+				exit();
+			}else{
+				header("location: ../Userdetails.html"/* .$_SESSION['ID'] */);
+				exit();
+			}
 		}
+	}
+}
 
+function isAdmin($conn , $userId){
+	$query = "SELECT isAdmin FROM users WHERE userId = $userId";
+	$admin = [];
+	if($stmt = $conn->prepare($query)){
+		$stmt->execute();
+		$stmt->bind_result($isAdmin);
+		while($stmt->fetch()){
+			array_push($admin, $isAdmin);
+		}
+		$stmt->close();
+	}
+	return $admin[0];
+}
+
+function isbanned( $con , $userId){
+	$ts = time();
+	$query = "SELECT * FROM banned where userId = $userId";
+	$result = mysqli_query($con, $query);
+	if (mysqli_num_rows($result) > 0) {
+ 		$banned = mysqli_fetch_assoc($result);
+ 		if($banned['time'] == 0){
+ 			return true;
+ 		}else if($banned['time'] < $ts){
+ 			//Ban has expired 
+ 			removeBan($con, $userId);
+ 			return false;
+ 		}else{
+ 			return true;
+ 		}
+	}else{
+		return false;
+	}
+}
+
+function removeBan($con, $userId){
+	$query = "DELETE FROM banned WHERE userId = $userId";
+
+	if(!mysqli_query($con,$query)){
+		echo("Error description: " . mysqli_error($con));
 	}
 }
