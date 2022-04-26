@@ -1,4 +1,6 @@
 <?php
+include("includes/browse_users_functions.inc.php");
+include("connections.php");
 session_start();
 if(!isset($_SESSION['ID'])){
   ob_start();
@@ -7,9 +9,10 @@ if(!isset($_SESSION['ID'])){
   die();
 }
 $_SESSION['userCount'] = 0;
+$_SESSION['BestuserCount'] = 0;
 $userId_LoggedIn = $_SESSION['ID'];
 
-include("connections.php");
+
 ?>
 
 
@@ -63,43 +66,84 @@ include("connections.php");
     <h2>BROWSE USERS</h2>
     <div class="row_posters">
 <?php 
+//All users from the db
+$query = "SELECT userId from userdetails";
+$userIdArray = []; 
+if ($stmt = $con->prepare($query)) {
 
-$sql = "SELECT * FROM images";
-$result = mysqli_query($con,$sql); //potential error
-$processedIds=array();
-$id_to_image = array();
-  
-// Push elements to the array
-if(mysqli_num_rows($result)> 0){
-    while($fetch = mysqli_fetch_assoc($result)){
-        $image = $image + 1;
-        $userId =  $fetch["userId"];
-        if(!in_array( $userId , $processedIds)){
-            $id_to_image[$userId] =  $fetch["img_name"];
-    ?>
+    /* execute statement */
+    $stmt->execute();
 
-<!--<div class="nameDiv"> -->
-    <?php $finalImg = "./img/pfp/" . $fetch["img_name"]; ?>
-  <a href="/BrowseUser.php?<?php echo $userId; ?>">
-<img src="<?php echo $finalImg; ?>" alt="" class="row_poster row_posterLarge">
-</a>
-<!--<h6>Dean</h6>-->
-    <?php
-  // echo "Dean";
+    /* bind result variables */
+    $stmt->bind_result($userId);
 
-    
-    $finalImg = "./img/pfp/" . $fetch["img_name"];
-
-    ?>
-<!--</div> -->
-    <?php
+        /* fetch values */
+    while ($stmt->fetch()) {
+        array_push($userIdArray, $userId);
+            //printf ("%s\n", $userId);
     }
-    array_push($processedIds, "$userId");
-    }
+
+        /* close statement */
+    $stmt->close();
 }
+//Remove the user logged in ID
+removeId($userId_LoggedIn, $userIdArray);
+
+    //Remove all banned users, liked users
+$bannedUsers = bannedUsers($con);
+$likedUsers = likedUsers($userId_LoggedIn, $con);
+
+
+//Get rid of all the banned users
+if($bannedUsers){
+    removeIdArray($bannedUsers, $userIdArray);
+}
+//Get rid of all the liked users
+if($likedUsers){
+    removeIdArray($likedUsers, $userIdArray);
+}
+//Re-order the array
+$userIds = array_values($userIdArray);
+
+
+
+
+
+
+    foreach($userIds as $value){
+        $imgData = getImg($value, $con);
+        if($imgData == null){
+
+            //Default image is used if the user doesnt have a profile pic
+            $finalImg = "img/default/" . "default.png"; 
+        }else{
+            $finalImg = $imgData["img_dir"] . $imgData["img_name"]; 
+        }
+
+
+
 ?>
+
+
+        <a href="OpenUser.php?id=<?php echo $value; ?>">
+        <img src="<?php echo $finalImg; ?>" alt="user image" class="row_poster row_posterLarge" width="100" height="100">
+        </a>
+<?php } ?>
+
+
     </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 	
 	 <!--View Matches-->
     <div class="row">
@@ -117,7 +161,7 @@ if(mysqli_num_rows($result)> 0){
 
       <?php $finalImg = "./img/pfp/" . $id_to_image[$fetch["userId_Received"]]; ?>
   <a href="/BrowseUser.php?<?php echo $fetch["userId_Received"]; ?>">
-<img src="<?php echo $finalImg; ?>" alt="" class="row_poster row_posterLarge">
+<img src="<?php echo $finalImg; ?>" alt="" class="row_poster row_posterLarge" onerror=this.src="img/default/default.png">
 </a>
 <!--<h6>Dean</h6>-->
     <?php
@@ -131,6 +175,7 @@ if(mysqli_num_rows($result)> 0){
     <?php
     }
 }
+
 ?>
 	</div>
     </div>
@@ -138,14 +183,14 @@ if(mysqli_num_rows($result)> 0){
     <!--Your Top 5 Matches!-->
     <div class="row">
       <h2>TOP 5 MATCHES</h2>
-      <div class="row_posters">
+<!--       <div class="row_posters">
         <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl5.jpg" alt="" class="row_poster row_posterLarge">
         <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl.webp" alt="" class="row_poster row_posterLarge">
 		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl3.jpg" alt="" class="row_poster row_posterLarge">
 		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl4.jpg" alt="" class="row_poster row_posterLarge">			
 	  	<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl6.jpg" alt="" class="row_poster row_posterLarge">
 
-      </div>
+      </div> -->
     </div>
 
 <script>
