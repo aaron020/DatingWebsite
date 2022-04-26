@@ -1,10 +1,12 @@
 <?php
 include("includes/browse_users_functions.inc.php");
+include("includes/functions.inc.php");
 include("connections.php");
 session_start();
-if(!isset($_SESSION['ID'])){
+if(!isset($_SESSION['ID']) || isbanned($con, $_SESSION['ID'])){
+  setcookie("Logged_In", null, -1, '/');  
   ob_start();
-  header('Location: Login.php');
+  header('Location: index.php');
   ob_end_flush();
   die();
 }
@@ -106,6 +108,8 @@ if(count($userIdArray) > 15){
     $userIds = array_values($userIdArray);
 }
 
+shuffle($userIds);
+
 
 //First 10 users
 
@@ -140,7 +144,7 @@ if(count($userIdArray) > 15){
 
     <!--Liked Users-->
 <div class="row">
-    <h2>LIKED USERS</h2>
+    <h2>MY LIKED USERS</h2>
     <div class="row_posters">
 <?php 
 $userIdLiked = likedUsers($userId_LoggedIn, $con);
@@ -150,6 +154,8 @@ if(count($userIdLiked) > 15){
 }else{
     $userIds = array_reverse(array_values($userIdLiked));
 }
+
+
 
 
 //First 10 users

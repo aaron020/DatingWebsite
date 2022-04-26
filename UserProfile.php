@@ -1,8 +1,17 @@
 <?php
 session_start();
+include("includes/functions.inc.php");
 include("includes/browse_users_functions.inc.php");
 include("connections.php");
 
+
+if(!isset($_SESSION['ID']) || isbanned($con, $_SESSION['ID'])){
+  setcookie("Logged_In", null, -1, '/');
+  ob_start();
+  header('Location: index.php');
+  ob_end_flush();
+  die();
+}
 
 //The user that is logged in  11 to see all users
 $userId_LoggedIn = $_SESSION['ID'];

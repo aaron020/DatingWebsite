@@ -4,7 +4,7 @@ include("includes/uniChecker.inc.php");
 include("connections.php");
 if(!isset($_SESSION['ID'])){
 	ob_start();
-	header('Location: Register.html');
+	header('Location: index.php');
 	ob_end_flush();
 	die();
 }
