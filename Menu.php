@@ -60,7 +60,7 @@ $userId_LoggedIn = $_SESSION['ID'];
 
     <!--Browse Users-->
 <div class="row">
-    <h2>BROWSE USERS</h2>
+    <h2>BROWSE ALL USERS</h2>
     <div class="row_posters">
 <?php 
 //All users from the db
