@@ -33,12 +33,16 @@ if(isset($_COOKIE["Logged_In"])){
             <form action="includes/login.inc.php" method="post">
               <div class="form-row py-3 pt-5">
                 <div class="offset-1 col-lg-10">
-                  <input type="text" class="inp" name="usersId" placeholder="Username">
+                <input type="text" class="inp" name="usersId" placeholder="Enter Username" required
+                oninvalid="this.setCustomValidity('Enter User Name Here')"
+                oninput="this.setCustomValidity('')">
                 </div>
               </div>
               <div class="form-row">
                 <div class="offset-1 col-lg-10">
-                  <input type="password" class="inp" name="pwd" placeholder="Password">
+                <input type="password" class="inp" name="pwd" placeholder="Enter Password" required
+                oninvalid="this.setCustomValidity('Enter Password Here')"
+                oninput="this.setCustomValidity('')">
                 </div>
               </div>
               <div class="form-row pt-5">
