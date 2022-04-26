@@ -52,7 +52,7 @@ unset($_SESSION['admin_user']);
     		<div class="col-md-6 offset-md-3 info">
     			<h1 class="text-center">Love Connect</h1>
     			<p class="text-center">Connect with interesting people from different cities, and countries. Find people with the same unique hobbies as you!</p>
-    			<form action="Register.html">
+    			<form action="Register.php">
     				<input type="submit" class="submit" value="Get Connected!" name="Get Connected">
     			</form>
     		</div>

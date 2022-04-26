@@ -87,7 +87,7 @@ function createUser($conn, $name, $pwd) {
 	$sql = "INSERT INTO users (username, password) VALUES (?, ?);";
 	$stmt = mysqli_stmt_init($conn);
 	if (!mysqli_stmt_prepare($stmt, $sql)) {
-		header("location: ../Register.html?error=stmtfailed2");
+		header("location: ../Register.php?error=stmtfailed2");
 		exit();
 	}
 	

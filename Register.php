@@ -1,3 +1,4 @@
+<?php error_reporting(E_ERROR | E_WARNING | E_PARSE);?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -26,6 +27,7 @@
                 <input type="text" class="inp" name="usersId" placeholder="Enter Username" required
                 oninvalid="this.setCustomValidity('Enter User Name Here')"
                 oninput="this.setCustomValidity('')">
+                <p><?php $error = $_GET['error']; if($error == "usernametaken"){echo "User Name Taken";}?></p>
                 </div>
               </div>
               <div class="form-row">
@@ -33,6 +35,7 @@
                 <input type="password" class="inp" name="pwd" placeholder="Enter Password" required
                 oninvalid="this.setCustomValidity('Enter Password Here')"
                 oninput="this.setCustomValidity('')">
+                <p><?php $error = $_GET['error']; if($error == "pwdnomatch"){echo "Passwords do not Match";}?></p>
                 </div>
               </div>
               <div class="form-row py-3">
@@ -40,11 +43,13 @@
                 <input type="password" class="inp" name="pwd_confirm" placeholder="Confirm Password" required
                 oninvalid="this.setCustomValidity('Confirm Password Here')"
                 oninput="this.setCustomValidity('')">
+                <p><?php $error = $_GET['error']; if($error == "pwdnomatch"){echo "Passwords do not Match";}?></p>
                 </div>
               </div>              
               <div class="form-row pt-5">
                 <div class="offset-1 col-lg-10">
                   <button type="submit" name="submit" class="submit">Register</button>
+                  <p><?php $error = $_GET['error']; if($error == "stmtfailed2"){echo "Error: Failed to Create User";}?></p>
                 </div>
               </div>
               <div class="form-row pt-5">
@@ -54,17 +59,11 @@
                   </a>
                 </div>
               </div>
-            </form>
-            
+            </form>     
           </div>
-
-
           </div>
         </div>
       </div>
     </section>
-
-
-
   </body>
 </html>

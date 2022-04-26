@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
 session_start();
 if(isset($_COOKIE["Logged_In"])){
   $_SESSION['ID'] = $_COOKIE["Logged_In"];
@@ -36,6 +37,7 @@ if(isset($_COOKIE["Logged_In"])){
                 <input type="text" class="inp" name="usersId" placeholder="Enter Username" required
                 oninvalid="this.setCustomValidity('Enter User Name Here')"
                 oninput="this.setCustomValidity('')">
+                <p><?php $error = $_GET['error']; if($error == "wronglogin"){echo "User Name Incorrect";}?></p>
                 </div>
               </div>
               <div class="form-row">
@@ -43,29 +45,25 @@ if(isset($_COOKIE["Logged_In"])){
                 <input type="password" class="inp" name="pwd" placeholder="Enter Password" required
                 oninvalid="this.setCustomValidity('Enter Password Here')"
                 oninput="this.setCustomValidity('')">
+                <p><?php $error = $_GET['error']; if($error == "wrongpassword"){echo "Incorrect Password";}?></p>
                 </div>
               </div>
               <div class="form-row pt-5">
                 <div class="offset-1 col-lg-10">
                   <button type="submit" name="submit" class="submit">Login</button>
+                  <p><?php $error = $_GET['error']; if($error == "banned"){echo "User is Banned";}?></p>
                 </div>
               </div>
               <div class="form-row pt-5">
                 <div class="offset-1 col-lg-10">
-                  <a href="Register.html">Register</a>
+                  <a href="Register.php">Register</a>
                 </div>
               </div>
-            </form>
-            
+            </form>    
           </div>
-
-
           </div>
         </div>
       </div>
     </section>
-
-
-
   </body>
 </html>

@@ -27,22 +27,23 @@
 		require_once 'functions.inc.php';
 		
 		if (noInputSignup($name, $pwd, $pwd_confirm) !== false) {
-			header("location: ../Register.html?error=emptyinput");
+			header("location: ../Register.php?error=emptyinput");
 			exit();
 		}
 		if (invalidUid($name) !== false) {
-			header("location: ../Register.html?error=noname");
+			header("location: ../Register.php?error=noname");
 			exit();
 		}
 		if (pwdCon($pwd, $pwd_confirm) !== false) {
-			header("location: ../Register.html?error=pwdnomatch");
+			header("location: ../Register.php?error=pwdnomatch");
 			exit();
 		}
 		//This script can't find $conn
 		if (UidExists($conn, $name) !== false) {
-			header("location: ../Register.html?error=usernametaken");
+			header("location: ../Register.php?error=usernametaken");
 			exit();
 		}
+		
 		
 		createUser($conn, $name, $pwd);
 	}
