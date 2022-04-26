@@ -1,4 +1,5 @@
 <?php
+include("includes/functions.inc.php");
 
 //Returns username
 function getUsername($userId, $con){
@@ -17,10 +18,17 @@ function bannedText($userId, $con){
 	$result = mysqli_query($con, $query);
 	if (mysqli_num_rows($result) > 0) {
 		$banned = mysqli_fetch_assoc($result);
+
+
 		if($banned['time'] == 0){
 			return "Permanently Banned";
 		}else{
-			return "Temporarily Banned";
+			//check their temp ban hasnt run out 
+			if(isbanned($con, $userId)){
+				return "Temporarily Banned";
+			}else{
+				return "Not Banned";
+			}	
 		}
 	}else{
 		return "Not Banned";
@@ -55,4 +63,27 @@ function getAllUserIds($con){
 		$stmt->close();
 	}
 	return $userIds;
+}
+
+function banUser($userId, $con, $time){
+	//Ban user forever
+	if($time == 0){
+		$query = "INSERT into banned (userId, time) values ($userId, $time)";
+	}else{
+		//temp ban
+		$newTime = time() + $time;
+		$query = "INSERT into banned (userId, time) values ($userId, $newTime)";
+	}
+	if(!mysqli_query($con,$query)){
+		echo("Error description: " . mysqli_error($con));
+	}
+}
+
+
+function unBanUser($userId, $con){
+	$query = "DELETE FROM banned WHERE userId = $userId";
+
+	if(!mysqli_query($con,$query)){
+		echo("Error description: " . mysqli_error($con));
+	}
 }
