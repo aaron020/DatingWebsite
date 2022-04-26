@@ -42,7 +42,7 @@ $userId_LoggedIn = $_SESSION['ID'];
 <div id="mySidenav" class="sidenav">
 
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="UserProfile.php">My Profile</a>
+  <a href="UserProfile.php">My Profile</a>
   <a href="BrowseUser.php">Browse Users</a>
   <a href="changePreferences.html">Search</a>
   <a href="match.php">View Matches</a>
@@ -55,7 +55,7 @@ $userId_LoggedIn = $_SESSION['ID'];
 <div id="main">
   <span style="font-size:30px;cursor:pointer; color: white" onclick="openNav()">&#9776; Menu</span>
 </div>
-	
+    
 
 
     <!--Browse Users-->
@@ -138,62 +138,54 @@ if(count($userIdArray) > 15){
 
 
 
-
-
-
-
-
-
-
-
-	
-	 <!--View Matches-->
-    <div class="row">
-      <h2>VIEW Likes</h2>
-      <div class="row_posters">
-       <?php 
-
-$sql = "SELECT userId_Received FROM likes where userId_Sent=$userId_LoggedIn";
-$result = mysqli_query($con,$sql); //potential error
-if(mysqli_num_rows($result)> 0){
-    while($fetch = mysqli_fetch_assoc($result)){
-        $image = $image + 1;
-    ?>
-
-
-      <?php $finalImg = "./img/pfp/" . $id_to_image[$fetch["userId_Received"]]; ?>
-  <a href="/BrowseUser.php?<?php echo $fetch["userId_Received"]; ?>">
-<img src="<?php echo $finalImg; ?>" alt="" class="row_poster row_posterLarge" onerror=this.src="img/default/default.png">
-</a>
-<!--<h6>Dean</h6>-->
-    <?php
-  // echo "Dean";
-
-    
-    $finalImg = "./img/pfp/" . $fetch["img_name"];
-
-    ?>
-<!--</div> -->
-    <?php
-    }
+    <!--Liked Users-->
+<div class="row">
+    <h2>LIKED USERS</h2>
+    <div class="row_posters">
+<?php 
+$userIdLiked = likedUsers($userId_LoggedIn, $con);
+//Re-order the array
+if(count($userIdLiked) > 15){
+    $userIds = array_slice(array_reverse(array_values($userIdLiked)), 0, 15);
+}else{
+    $userIds = array_reverse(array_values($userIdLiked));
 }
 
+
+//First 10 users
+
+
+
+
+    foreach($userIds as $value){
+        $imgData = getImg($value, $con);
+        if($imgData == null){
+
+            //Default image is used if the user doesnt have a profile pic
+            $finalImg = "img/default/" . "default.png"; 
+        }else{
+            $finalImg = $imgData["img_dir"] . $imgData["img_name"]; 
+        }
+
+
+
 ?>
-	</div>
-    </div>
 
-    <!--Your Top 5 Matches!-->
-    <div class="row">
-      <h2>TOP 5 MATCHES</h2>
-<!--       <div class="row_posters">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl5.jpg" alt="" class="row_poster row_posterLarge">
-        <img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl.webp" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl3.jpg" alt="" class="row_poster row_posterLarge">
-		<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl4.jpg" alt="" class="row_poster row_posterLarge">			
-	  	<img src="C:\Users\35386\OneDrive\Desktop\Year 3\CS4116\images\girl6.jpg" alt="" class="row_poster row_posterLarge">
 
-      </div> -->
+
+        <img src="<?php echo $finalImg; ?>" alt="user image" class="row_poster row_posterLarge" width="100" height="100">
+        
+<?php } ?>
+
+
     </div>
+</div>
+
+
+
+
+
+
 
 <script>
 function openNav() {
