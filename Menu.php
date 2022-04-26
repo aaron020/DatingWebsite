@@ -21,6 +21,7 @@ $userId_LoggedIn = $_SESSION['ID'];
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="MainMenuStyle.css">
+<title>Menu</title>
 </head>
 <body>
 
@@ -39,7 +40,7 @@ $userId_LoggedIn = $_SESSION['ID'];
 
 
 <div id="mySidenav" class="sidenav">
-<input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search..." title="Search a user">
+
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <a href="UserProfile.php">My Profile</a>
   <a href="BrowseUser.php">Browse Users</a>
@@ -56,10 +57,6 @@ $userId_LoggedIn = $_SESSION['ID'];
 </div>
 	
 
-	<form id="form"> 
-  <input type="search" id="search-box" placeholder="Search...">
-  <button>Search</button>
-</form>
 
     <!--Browse Users-->
 <div class="row">
@@ -103,9 +100,14 @@ if($likedUsers){
     removeIdArray($likedUsers, $userIdArray);
 }
 //Re-order the array
-$userIds = array_values($userIdArray);
+if(count($userIdArray) > 15){
+    $userIds = array_slice(array_values($userIdArray), 0, 15);
+}else{
+    $userIds = array_values($userIdArray);
+}
 
 
+//First 10 users
 
 
 

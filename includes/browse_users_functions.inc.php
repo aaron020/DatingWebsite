@@ -27,7 +27,7 @@ function getPreferences($userId, $con){
 
 
 		}else{
-			echo "preferences - error";
+			//echo "preferences - error";
 			//ERROR
 		}
 	}
@@ -50,7 +50,7 @@ function getUserDetails($userId, $con){
 	if (mysqli_num_rows($result) > 0) {
  			return mysqli_fetch_assoc($result);
  	}else{
- 		echo("userdetails - error");
+ 		//echo("userdetails - error");
  	}
 }
 
@@ -238,7 +238,7 @@ function notInterestedUsers($userId_LoggedIn ,$con){
 function addLike($userId_LoggedIn, $userId_Received, $con){
 	$query = "INSERT into likes (userId_Sent, userId_Received) values ($userId_LoggedIn, $userId_Received)";
 	if(!mysqli_query($con,$query)){
-		echo("Error description: " . mysqli_error($con));
+		//echo("Error description: " . mysqli_error($con));
 	}
 	checkForMatch($userId_LoggedIn,$userId_Received,$con);
 }
@@ -258,11 +258,11 @@ function addMatch($userId_first, $userId_second, $con){
 	//Create match for first user
 	$queryOne = "INSERT into matches (userId_Sent,userId_Received) values ($userId_first, $userId_second)";
 	if(!mysqli_query($con,$queryOne)){
-		echo("Error description: " . mysqli_error($con));
+		//echo("Error description: " . mysqli_error($con));
 	}
 	$queryTwo = "INSERT into matches (userId_Sent,userId_Received) values ($userId_second,$userId_first)";
 	if(!mysqli_query($con,$queryTwo)){
-		echo("Error description: " . mysqli_error($con));
+		//echo("Error description: " . mysqli_error($con));
 	}
 }
 
@@ -270,7 +270,7 @@ function addMatch($userId_first, $userId_second, $con){
 function addNotInterested($userId_LoggedIn, $userId_Received, $con){
 	$query = "INSERT into not_interested (userId_Sent, userId_Received) values ($userId_LoggedIn, $userId_Received)";
 	if(!mysqli_query($con,$query)){
-		echo("Error description: " . mysqli_error($con));
+		//echo("Error description: " . mysqli_error($con));
 	}
 }
 

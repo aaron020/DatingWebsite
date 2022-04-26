@@ -33,6 +33,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
   
 
   if($_SESSION['userCount'] >= $_SESSION['maxUsers']){
+    $_SESSION['userCount'] = 0;
     header('Location: noUsers.html');
     exit();
   }

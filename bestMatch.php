@@ -42,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
   //All the Id's of users that the user logged in should be interested in
   $ids = bestMatch($userId_LoggedIn, $con);
-  print_r($ids);
+  //print_r($ids);
 
   if(isset($_SESSION['userIds'])){
     //Session var ia already set - remove all vals + give it new ones
