@@ -1,4 +1,0 @@
-Black #323232
-Pink #FA4EAB
-Lighter Pink #FE83C6
-White #FFF2F9
